@@ -1,0 +1,11 @@
+Logiciel libre
+La notion la plus importante propos d'Ubuntu n'est pas qu'elle est distribuée gratuitement, même si nous nous engageons ne jamais charger le moindre centime pour Ubuntu. C'est plutôt qu'elle confère le droit aux libertés logicielles aux personnes installant et utilisant Ubuntu. Ce sont ces libertés qui permettent la communauté d'Ubuntu de s'agrandir, d'échanger son expérience collective et son expertise pour améliorer Ubuntu et la rendre utilisable dans de nouveaux pays et de nouvelles industries.
+Tirés de What is Free Software de la Free Software Foundation, les libertés la base du concept des logiciels libres sont définies ainsi :
+La liberté d'exécuter un programme, pour quelque fin que ce soit.
+La liberté d'étudier le fonctionnement du programme et de l'adapter ses propres besoins.
+La liberté de redistribuer des copies d'un programme, pour que vous aidiez votre prochain.
+La liberté d'améliorer un programme et de publier vos améliorations au public, afin d'en faire bénéficier tout le monde.
+Le Logiciel Libre a été un mouvement social cohérent depuis plus de deux décennies. Ce mouvement a produit des millions de lignes de code et de documentation, ainsi qu'une communauté vivante, active laquelle Ubuntu est fière de faire partie.
+Logiciel code ouvert
+Le terme code ouvert (open source) est apparu en 1998 afin de supprimer l'ambiguïté entourant le mot anglais free (qui signifie aussi bien gratuit que libre). L'Open Source Initiative décrit le logiciel code source ouvert dans sa Définition du Logiciel Code Ouvert. Le mouvement du code ouvert continue de jouir d'un succès grandissant et d'une reconnaissance mondiale.
+Ubuntu est heureuse se qualifier code ouvert. Alors que certains préfèrent voir le code ouvert et le logiciel libre comme deux mouvements en compétition et buts différents, nous nous ne voyons pas ces mouvements comme étant distincts ou incompatibles. Ubuntu comprend fièrement des membres s'identifiant autant au mouvement du logiciel libre que du mouvement du code ouvert, ainsi que de nombreux s'attachant aux deux camps.

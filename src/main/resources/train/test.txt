@@ -1,0 +1,9 @@
+Notre travail sur Ubuntu est inspiré par une philosophie de la liberté des logiciels qui, espérons nous, s'épandra et apportera les bénéfices de la technologie informatique de par le monde.
+Logiciel libre et gratuit
+Ubuntu est un projet communautaire de création d'un système d'exploitation et d'un ensemble complet de programmes informatiques utilisant des logiciels libres et gratuits. Au coeur de la Philosophie d'Ubuntu sur la Liberté Logicielle se trouvent ces idéaux philosophiques :
+Tout utilisateur d'ordinateur devrait avoir la liberté d'exécuter, de copier, de distribuer, d'étudier, de partager, de modifier et d'améliorer ses logiciels pour toutes fins, sans payer aucun frais de licence.
+Tout utilisateur d'ordinateur devrait pouvoir utiliser ses logiciels dans la langue de son choix.
+Tout utilisateur d'ordinateur devrait être en mesure d'utiliser tous ses logiciels, même s'il souffre d'un handicap.
+Notre philosophie est reflétée dans les programmes que nous produisons et incluons dans notre distribution. De ce fait, les termes des licences des logiciels que nous distribuons sont en accord avec notre philosophie, selon la Politique de Licence d'Ubuntu.
+Quand vous installez Ubuntu, presque tous les programmes installés respectent déjà ces idéaux, et nous travaillons dans le but que chacune des pièces composant Ubuntu dont vous avez besoin soit disponible sous une licence qui vous assure ces libertés. Actuellement, nous appliquons une exception bien spécifique pour quelques pilotes qui ne sont disponibles uniquement que sous forme binaire, sans quoi de nombreux ordinateurs ne sauraient compléter correctement le processus d'installation d'Ubuntu. Nous les plaçons dans une section restreinte de votre système, ce qui les rend trivials à supprimer si vous n'en avez pas besoin.
+Pour plus d'informations à propos des composants d'Ubuntu, veuillez visiter Components.
