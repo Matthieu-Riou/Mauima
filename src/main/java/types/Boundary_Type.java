@@ -1,5 +1,5 @@
 
-/* First created by JCasGen Thu Nov 19 14:50:35 CET 2015 */
+/* First created by JCasGen Thu Nov 19 15:18:37 CET 2015 */
 package types;
 
 import org.apache.uima.jcas.JCas;
@@ -11,10 +11,10 @@ import org.apache.uima.cas.impl.TypeImpl;
 import org.apache.uima.cas.Type;
 import org.apache.uima.jcas.tcas.Annotation_Type;
 
-/** syntaxical boundaries delimited by punctuation or numbers
- * Updated by JCasGen Thu Nov 19 14:50:35 CET 2015
+/** syntaxical boundary delimited by punctuation or numbers
+ * Updated by JCasGen Thu Nov 19 15:18:37 CET 2015
  * @generated */
-public class Boundaries_Type extends Annotation_Type {
+public class Boundary_Type extends Annotation_Type {
   /** @generated 
    * @return the generator for this type
    */
@@ -24,25 +24,25 @@ public class Boundaries_Type extends Annotation_Type {
   private final FSGenerator fsGenerator = 
     new FSGenerator() {
       public FeatureStructure createFS(int addr, CASImpl cas) {
-  			 if (Boundaries_Type.this.useExistingInstance) {
+  			 if (Boundary_Type.this.useExistingInstance) {
   			   // Return eq fs instance if already created
-  		     FeatureStructure fs = Boundaries_Type.this.jcas.getJfsFromCaddr(addr);
+  		     FeatureStructure fs = Boundary_Type.this.jcas.getJfsFromCaddr(addr);
   		     if (null == fs) {
-  		       fs = new Boundaries(addr, Boundaries_Type.this);
-  			   Boundaries_Type.this.jcas.putJfsFromCaddr(addr, fs);
+  		       fs = new Boundary(addr, Boundary_Type.this);
+  			   Boundary_Type.this.jcas.putJfsFromCaddr(addr, fs);
   			   return fs;
   		     }
   		     return fs;
-        } else return new Boundaries(addr, Boundaries_Type.this);
+        } else return new Boundary(addr, Boundary_Type.this);
   	  }
     };
   /** @generated */
   @SuppressWarnings ("hiding")
-  public final static int typeIndexID = Boundaries.typeIndexID;
+  public final static int typeIndexID = Boundary.typeIndexID;
   /** @generated 
      @modifiable */
   @SuppressWarnings ("hiding")
-  public final static boolean featOkTst = JCasRegistry.getFeatOkTst("types.Boundaries");
+  public final static boolean featOkTst = JCasRegistry.getFeatOkTst("types.Boundary");
 
 
 
@@ -51,7 +51,7 @@ public class Boundaries_Type extends Annotation_Type {
 	 * @param jcas JCas
 	 * @param casType Type 
 	 */
-  public Boundaries_Type(JCas jcas, Type casType) {
+  public Boundary_Type(JCas jcas, Type casType) {
     super(jcas, casType);
     casImpl.getFSClassRegistry().addGeneratorForType((TypeImpl)this.casType, getFSGenerator());
 

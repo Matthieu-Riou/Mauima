@@ -1,6 +1,6 @@
 
 
-/* First created by JCasGen Thu Nov 19 14:50:35 CET 2015 */
+/* First created by JCasGen Thu Nov 19 15:18:37 CET 2015 */
 package types;
 
 import org.apache.uima.jcas.JCas; 
@@ -10,16 +10,16 @@ import org.apache.uima.jcas.cas.TOP_Type;
 import org.apache.uima.jcas.tcas.Annotation;
 
 
-/** syntaxical boundaries delimited by punctuation or numbers
- * Updated by JCasGen Thu Nov 19 14:50:35 CET 2015
- * XML source: /comptes/E114886B/Mauima/src/main/resources/de/types/typeSystemDescriptor.xml
+/** syntaxical boundary delimited by punctuation or numbers
+ * Updated by JCasGen Thu Nov 19 15:18:37 CET 2015
+ * XML source: /comptes/E114886B/Mauima/src/main/resources/types/typeSystemDescriptor.xml
  * @generated */
-public class Boundaries extends Annotation {
+public class Boundary extends Annotation {
   /** @generated
    * @ordered 
    */
   @SuppressWarnings ("hiding")
-  public final static int typeIndexID = JCasRegistry.register(Boundaries.class);
+  public final static int typeIndexID = JCasRegistry.register(Boundary.class);
   /** @generated
    * @ordered 
    */
@@ -33,14 +33,14 @@ public class Boundaries extends Annotation {
  
   /** Never called.  Disable default constructor
    * @generated */
-  protected Boundaries() {/* intentionally empty block */}
+  protected Boundary() {/* intentionally empty block */}
     
   /** Internal - constructor used by generator 
    * @generated
    * @param addr low level Feature Structure reference
    * @param type the type of this Feature Structure 
    */
-  public Boundaries(int addr, TOP_Type type) {
+  public Boundary(int addr, TOP_Type type) {
     super(addr, type);
     readObject();
   }
@@ -48,7 +48,7 @@ public class Boundaries extends Annotation {
   /** @generated
    * @param jcas JCas to which this Feature Structure belongs 
    */
-  public Boundaries(JCas jcas) {
+  public Boundary(JCas jcas) {
     super(jcas);
     readObject();   
   } 
@@ -58,7 +58,7 @@ public class Boundaries extends Annotation {
    * @param begin offset to the begin spot in the SofA
    * @param end offset to the end spot in the SofA 
   */  
-  public Boundaries(JCas jcas, int begin, int end) {
+  public Boundary(JCas jcas, int begin, int end) {
     super(jcas);
     setBegin(begin);
     setEnd(end);
