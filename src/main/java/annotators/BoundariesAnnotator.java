@@ -28,9 +28,6 @@ public class BoundariesAnnotator extends JCasAnnotator_ImplBase {
 			b.addToIndexes();
 			pred = Math.max(m.start(0), m.start(1))+(Math.max(m.end(0), m.end(1)) - Math.max(m.start(0), m.start(1)))+1;
 		}
-		
-		for (TextualSegment b : select(jCas, TextualSegment.class))
-			System.out.println(b.getCoveredText());
 	}
 
 }

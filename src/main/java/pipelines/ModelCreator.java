@@ -4,8 +4,8 @@ import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngineDesc
 import static org.apache.uima.fit.factory.CollectionReaderFactory.createReaderDescription;
 import static org.apache.uima.fit.pipeline.SimplePipeline.runPipeline;
 import annotators.BoundariesAnnotator;
+import annotators.Tokenizer;
 import de.tudarmstadt.ukp.dkpro.core.io.text.TextReader;
-import de.tudarmstadt.ukp.dkpro.core.tokit.BreakIteratorSegmenter;
 
 public class ModelCreator {
 	
@@ -14,8 +14,8 @@ public class ModelCreator {
 	        createReaderDescription(TextReader.class,
 	            TextReader.PARAM_SOURCE_LOCATION, "src/main/resources/train/*.txt",
 	            TextReader.PARAM_LANGUAGE, "fr"),
-	            createEngineDescription(BreakIteratorSegmenter.class),
-	            createEngineDescription(BoundariesAnnotator.class)
+	            createEngineDescription(BoundariesAnnotator.class),
+	            createEngineDescription(Tokenizer.class)
 	        );
 	  }
 
