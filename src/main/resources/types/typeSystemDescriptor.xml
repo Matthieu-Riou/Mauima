@@ -6,8 +6,8 @@
     <vendor/>
   <types>
     <typeDescription>
-      <name>types.Boundary</name>
-      <description>syntaxical boundary delimited by punctuation or numbers</description>
+      <name>types.TextualSegment</name>
+      <description>textual segment delemited by syntaxical boundary</description>
       <supertypeName>uima.tcas.Annotation</supertypeName>
     </typeDescription>
   </types>

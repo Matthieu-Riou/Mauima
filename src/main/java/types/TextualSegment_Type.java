@@ -1,5 +1,5 @@
 
-/* First created by JCasGen Thu Nov 19 15:18:37 CET 2015 */
+/* First created by JCasGen Thu Nov 19 16:46:37 CET 2015 */
 package types;
 
 import org.apache.uima.jcas.JCas;
@@ -11,10 +11,10 @@ import org.apache.uima.cas.impl.TypeImpl;
 import org.apache.uima.cas.Type;
 import org.apache.uima.jcas.tcas.Annotation_Type;
 
-/** syntaxical boundary delimited by punctuation or numbers
- * Updated by JCasGen Thu Nov 19 15:18:37 CET 2015
+/** textual segment delemited by syntaxical boundary
+ * Updated by JCasGen Thu Nov 19 16:46:37 CET 2015
  * @generated */
-public class Boundary_Type extends Annotation_Type {
+public class TextualSegment_Type extends Annotation_Type {
   /** @generated 
    * @return the generator for this type
    */
@@ -24,25 +24,25 @@ public class Boundary_Type extends Annotation_Type {
   private final FSGenerator fsGenerator = 
     new FSGenerator() {
       public FeatureStructure createFS(int addr, CASImpl cas) {
-  			 if (Boundary_Type.this.useExistingInstance) {
+  			 if (TextualSegment_Type.this.useExistingInstance) {
   			   // Return eq fs instance if already created
-  		     FeatureStructure fs = Boundary_Type.this.jcas.getJfsFromCaddr(addr);
+  		     FeatureStructure fs = TextualSegment_Type.this.jcas.getJfsFromCaddr(addr);
   		     if (null == fs) {
-  		       fs = new Boundary(addr, Boundary_Type.this);
-  			   Boundary_Type.this.jcas.putJfsFromCaddr(addr, fs);
+  		       fs = new TextualSegment(addr, TextualSegment_Type.this);
+  			   TextualSegment_Type.this.jcas.putJfsFromCaddr(addr, fs);
   			   return fs;
   		     }
   		     return fs;
-        } else return new Boundary(addr, Boundary_Type.this);
+        } else return new TextualSegment(addr, TextualSegment_Type.this);
   	  }
     };
   /** @generated */
   @SuppressWarnings ("hiding")
-  public final static int typeIndexID = Boundary.typeIndexID;
+  public final static int typeIndexID = TextualSegment.typeIndexID;
   /** @generated 
      @modifiable */
   @SuppressWarnings ("hiding")
-  public final static boolean featOkTst = JCasRegistry.getFeatOkTst("types.Boundary");
+  public final static boolean featOkTst = JCasRegistry.getFeatOkTst("types.TextualSegment");
 
 
 
@@ -51,7 +51,7 @@ public class Boundary_Type extends Annotation_Type {
 	 * @param jcas JCas
 	 * @param casType Type 
 	 */
-  public Boundary_Type(JCas jcas, Type casType) {
+  public TextualSegment_Type(JCas jcas, Type casType) {
     super(jcas, casType);
     casImpl.getFSClassRegistry().addGeneratorForType((TypeImpl)this.casType, getFSGenerator());
 
