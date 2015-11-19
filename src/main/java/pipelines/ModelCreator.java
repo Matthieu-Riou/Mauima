@@ -6,11 +6,14 @@ import static org.apache.uima.fit.pipeline.SimplePipeline.runPipeline;
 
 import java.io.FileOutputStream;
 
+import opennlp.tools.tokenize.WhitespaceTokenizer;
+
 import org.apache.uima.fit.factory.TypeSystemDescriptionFactory;
 import org.apache.uima.resource.metadata.TypeSystemDescription;
 
 import annotators.BoundariesAnnotator;
 import de.tudarmstadt.ukp.dkpro.core.io.text.TextReader;
+import de.tudarmstadt.ukp.dkpro.core.opennlp.OpenNlpSegmenter;
 
 public class ModelCreator {
 	
@@ -19,7 +22,7 @@ public class ModelCreator {
 	        createReaderDescription(TextReader.class,
 	            TextReader.PARAM_SOURCE_LOCATION, "src/main/resources/train/*.txt",
 	            TextReader.PARAM_LANGUAGE, "fr"),
-	            createEngineDescription(BoundariesAnnotator.class)
+	            createEngineDescription(OpenNlpSegmenter.class)
 	        );
 	  }
 
