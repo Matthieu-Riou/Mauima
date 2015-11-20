@@ -24,7 +24,7 @@ public class AnnotatedCollection_Impl  implements AnnotatedCollection, SharedRes
 	protected void add(String line)
 	{
 		Set<Candidate> candidates = new HashSet<Candidate>();
-		String[] splits = line.substring(2).split(";");
+		String[] splits = line.split(";");
 		
 		for(String c : splits)
 		{
