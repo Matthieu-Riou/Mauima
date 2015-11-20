@@ -17,14 +17,7 @@ public class ModelCreator {
 	public static void main(String[] args) throws Exception {
 		ExternalResourceDescription candidatesResourceDesc = createExternalResourceDescription(AnnotatedCollection_Impl.class,
 				 "file:resources/test.txt");
-		
-	    runPipeline(
-	        createReaderDescription(TextReader.class,
-	            TextReader.PARAM_SOURCE_LOCATION, "src/main/resources/train/*.txt",
-	            TextReader.PARAM_LANGUAGE, "fr"),
-	            createEngineDescription(TextualSegmentAnnotator.class),
-	            createEngineDescription(Tokenizer.class)
-	        );
+		System.out.println("Loaded");
 	  }
 
 }
