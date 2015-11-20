@@ -7,6 +7,7 @@ import static org.apache.uima.fit.pipeline.SimplePipeline.runPipeline;
 import org.tartarus.snowball.ext.PorterStemmer;
 
 import annotators.CandidateAnnotator;
+import annotators.NGramAnnotator;
 import annotators.TextualSegmentAnnotator;
 import annotators.Tokenizer;
 import de.tudarmstadt.ukp.dkpro.core.io.text.TextReader;
@@ -20,6 +21,7 @@ public class CandidateCreator {
 	            TextReader.PARAM_LANGUAGE, "fr"),
 	            createEngineDescription(TextualSegmentAnnotator.class),
 	            createEngineDescription(Tokenizer.class),
+	            createEngineDescription(NGramAnnotator.class),
 	            createEngineDescription(CandidateAnnotator.class)
 	        );
 	  }
