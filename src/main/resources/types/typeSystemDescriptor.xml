@@ -10,5 +10,17 @@
       <description>textual segment delemited by syntaxical boundary</description>
       <supertypeName>uima.tcas.Annotation</supertypeName>
     </typeDescription>
+  <typeDescription>
+      <name>types.NGram</name>
+      <description>ngram type</description>
+      <supertypeName>uima.tcas.Annotation</supertypeName>
+      <features>
+        <featureDescription>
+          <name>length</name>
+          <description>length of the NGram: 2 for bigram, 3 for trigram, ...</description>
+          <rangeTypeName>uima.cas.Byte</rangeTypeName>
+        </featureDescription>
+      </features>
+    </typeDescription>
   </types>
 </typeSystemDescription>

@@ -1,6 +1,6 @@
 
 
-/* First created by JCasGen Thu Nov 19 16:46:37 CET 2015 */
+/* First created by JCasGen Fri Nov 20 15:54:30 CET 2015 */
 package types;
 
 import org.apache.uima.jcas.JCas; 
@@ -10,16 +10,16 @@ import org.apache.uima.jcas.cas.TOP_Type;
 import org.apache.uima.jcas.tcas.Annotation;
 
 
-/** textual segment delemited by syntaxical boundary
+/** ngram type
  * Updated by JCasGen Fri Nov 20 15:54:30 CET 2015
  * XML source: /comptes/E114886B/Mauima/src/main/resources/types/typeSystemDescriptor.xml
  * @generated */
-public class TextualSegment extends Annotation {
+public class NGram extends Annotation {
   /** @generated
    * @ordered 
    */
   @SuppressWarnings ("hiding")
-  public final static int typeIndexID = JCasRegistry.register(TextualSegment.class);
+  public final static int typeIndexID = JCasRegistry.register(NGram.class);
   /** @generated
    * @ordered 
    */
@@ -33,14 +33,14 @@ public class TextualSegment extends Annotation {
  
   /** Never called.  Disable default constructor
    * @generated */
-  protected TextualSegment() {/* intentionally empty block */}
+  protected NGram() {/* intentionally empty block */}
     
   /** Internal - constructor used by generator 
    * @generated
    * @param addr low level Feature Structure reference
    * @param type the type of this Feature Structure 
    */
-  public TextualSegment(int addr, TOP_Type type) {
+  public NGram(int addr, TOP_Type type) {
     super(addr, type);
     readObject();
   }
@@ -48,7 +48,7 @@ public class TextualSegment extends Annotation {
   /** @generated
    * @param jcas JCas to which this Feature Structure belongs 
    */
-  public TextualSegment(JCas jcas) {
+  public NGram(JCas jcas) {
     super(jcas);
     readObject();   
   } 
@@ -58,7 +58,7 @@ public class TextualSegment extends Annotation {
    * @param begin offset to the begin spot in the SofA
    * @param end offset to the end spot in the SofA 
   */  
-  public TextualSegment(JCas jcas, int begin, int end) {
+  public NGram(JCas jcas, int begin, int end) {
     super(jcas);
     setBegin(begin);
     setEnd(end);
@@ -74,6 +74,28 @@ public class TextualSegment extends Annotation {
    */
   private void readObject() {/*default - does nothing empty block */}
      
-}
+ 
+    
+  //*--------------*
+  //* Feature: length
+
+  /** getter for length - gets length of the NGram: 2 for bigram, 3 for trigram, ...
+   * @generated
+   * @return value of the feature 
+   */
+  public byte getLength() {
+    if (NGram_Type.featOkTst && ((NGram_Type)jcasType).casFeat_length == null)
+      jcasType.jcas.throwFeatMissing("length", "types.NGram");
+    return jcasType.ll_cas.ll_getByteValue(addr, ((NGram_Type)jcasType).casFeatCode_length);}
+    
+  /** setter for length - sets length of the NGram: 2 for bigram, 3 for trigram, ... 
+   * @generated
+   * @param v value to set into the feature 
+   */
+  public void setLength(byte v) {
+    if (NGram_Type.featOkTst && ((NGram_Type)jcasType).casFeat_length == null)
+      jcasType.jcas.throwFeatMissing("length", "types.NGram");
+    jcasType.ll_cas.ll_setByteValue(addr, ((NGram_Type)jcasType).casFeatCode_length, v);}    
+  }
 
     
