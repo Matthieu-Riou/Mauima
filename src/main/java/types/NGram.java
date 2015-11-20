@@ -11,7 +11,7 @@ import org.apache.uima.jcas.tcas.Annotation;
 
 
 /** ngram type
- * Updated by JCasGen Fri Nov 20 15:54:30 CET 2015
+ * Updated by JCasGen Fri Nov 20 16:31:52 CET 2015
  * XML source: /comptes/E114886B/Mauima/src/main/resources/types/typeSystemDescriptor.xml
  * @generated */
 public class NGram extends Annotation {

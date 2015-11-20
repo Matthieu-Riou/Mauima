@@ -14,7 +14,7 @@ import org.apache.uima.cas.Feature;
 import org.apache.uima.jcas.tcas.Annotation_Type;
 
 /** ngram type
- * Updated by JCasGen Fri Nov 20 15:54:30 CET 2015
+ * Updated by JCasGen Fri Nov 20 16:31:52 CET 2015
  * @generated */
 public class NGram_Type extends Annotation_Type {
   /** @generated 
