@@ -1,0 +1,2 @@
+Science fiction:5:2:20:34;Planète:3:5:12:45:68
+Voiture:12:1:1:23:124;Garage Automobile:1:1:1:12:12
