@@ -25,17 +25,15 @@ public class NGramAnnotator extends JCasAnnotator_ImplBase {
 		int current_ngram_end_pos = 0;
 		for (int ngram_len = min_ngram_len; ngram_len <= max_ngram_len; ngram_len ++) {
 			for (TextualSegment ts : select(jCas, TextualSegment.class)) {
-				List<Token> tokens =  selectCovered(jCas, Token.class, ts);
-				for (int n = 0; n < tokens.size(); n ++) {
-					
-				
-				
-				
-					int ngram_index_range = 0;
-					
-					current_ngram_end_pos = current_ngram_start_pos + ngram_index_range;//TODO compute relative to token size
-					NGram ng = new NGram(jCas, current_ngram_start_pos, current_ngram_end_pos);
-					if (current_ngram_start_pos < 10) {System.out.println(ng.getCoveredText());}//--------------------------
+				ArrayList<Token> tokens =  new ArrayList<Token>(selectCovered(jCas, Token.class, ts));
+				for (Token t : tokens) {
+					System.out.println(t.getCoveredText());
+				}
+				for (int n = 0; n < tokens.size() - (ngram_len-1); n ++) {
+					current_ngram_start_pos = tokens.get(n).getBegin();
+					System.out.println(current_ngram_start_pos);
+					current_ngram_end_pos = tokens.get(n + ngram_len - 1).getEnd();
+					NGram ng = new NGram(jCas, current_ngram_start_pos, current_ngram_end_pos+1);
 					ng.addToIndexes();
 					current_ngram_start_pos ++;
 				}

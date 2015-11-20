@@ -37,7 +37,7 @@ public class CandidateAnnotator extends JCasAnnotator_ImplBase {
 						else
 							phrase += " " + stemmize(tok.getCoveredText());
 				}
-				System.out.println(phrase);
+				//System.out.println(phrase);
 			}
 		}
 	}
