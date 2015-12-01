@@ -1,9 +1,17 @@
 package annotators;
 
+import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
 import org.apache.uima.fit.component.JCasAnnotator_ImplBase;
 import org.apache.uima.fit.descriptor.ConfigurationParameter;
 import org.apache.uima.jcas.JCas;
+import types.NGram;
+import types.TextualSegment;
+
+import java.util.ArrayList;
+
+import static org.apache.uima.fit.util.JCasUtil.select;
+import static org.apache.uima.fit.util.JCasUtil.selectCovered;
 
 public class NGramAnnotator extends JCasAnnotator_ImplBase {
     public static final String PARAM_MIN_NGRAM_LENGTH = "min_ngram_length_";
@@ -15,7 +23,6 @@ public class NGramAnnotator extends JCasAnnotator_ImplBase {
 
     @Override
     public void process(JCas jCas) throws AnalysisEngineProcessException {
-        /*/
         int min_ngram_len = min_ngram_length_;
         int max_ngram_len = max_ngram_length_;
         int current_ngram_start_pos = 0; // set relative to textual segment for parallelization
@@ -31,8 +38,5 @@ public class NGramAnnotator extends JCasAnnotator_ImplBase {
                 }
             }
         }
-        //*/
-        System.out.println("min_ngram_length_ = " + min_ngram_length_);
-        System.out.println("max_ngram_length_ = " + max_ngram_length_);
     }
 }
