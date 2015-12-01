@@ -1,16 +1,14 @@
 package pipelines;
 
-import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngineDescription;
-import static org.apache.uima.fit.factory.CollectionReaderFactory.createReaderDescription;
-import static org.apache.uima.fit.pipeline.SimplePipeline.runPipeline;
-
-import org.tartarus.snowball.ext.PorterStemmer;
-
 import annotators.CandidateAnnotator;
 import annotators.NGramAnnotator;
 import annotators.TextualSegmentAnnotator;
 import annotators.Tokenizer;
 import de.tudarmstadt.ukp.dkpro.core.io.text.TextReader;
+
+import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngineDescription;
+import static org.apache.uima.fit.factory.CollectionReaderFactory.createReaderDescription;
+import static org.apache.uima.fit.pipeline.SimplePipeline.runPipeline;
 
 public class CandidateCreator {
 	
@@ -21,8 +19,10 @@ public class CandidateCreator {
 	            TextReader.PARAM_LANGUAGE, "fr"),
 	            createEngineDescription(TextualSegmentAnnotator.class),
 	            createEngineDescription(Tokenizer.class),
-	            createEngineDescription(NGramAnnotator.class),
-	            createEngineDescription(CandidateAnnotator.class)
+                createEngineDescription(NGramAnnotator.class,
+                        NGramAnnotator.PARAM_MIN_NGRAM_LENGTH, 3,
+                        NGramAnnotator.PARAM_MAX_NGRAM_LENGTH, 3),
+                createEngineDescription(CandidateAnnotator.class)
 	        );
 	  }
 
