@@ -18,7 +18,7 @@ public class ModelCreator {
 	
 	public static void main(String[] args) throws Exception {
 		ExternalResourceDescription candidatesResourceDesc = createExternalResourceDescription(AnnotatedCollection_Impl.class,
-				 "file:resources/test.txt");
+				 "resources/test.txt");
 		System.out.println("Loaded");
 		
 		AnalysisEngineDescription aed = createEngineDescription(FeaturesAnnotator.class, FeaturesAnnotator.CANDIDATE_KEY, candidatesResourceDesc);
