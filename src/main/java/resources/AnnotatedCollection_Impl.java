@@ -31,7 +31,7 @@ public class AnnotatedCollection_Impl  implements AnnotatedCollection, SharedRes
 			
 			candidate.setTerm_frequency(Integer.parseInt(values[1]));
 			candidate.setDocument_frequency(Integer.parseInt(values[2]));
-			candidate.setInverse_document_frequency(Integer.parseInt(values[3]));
+			candidate.setInverse_document_frequency(Double.parseDouble(values[3]));
 			candidate.setFirst_occurrence(Integer.parseInt(values[4]));
 			candidate.setLast_occurrence(Integer.parseInt(values[5]));
 			
@@ -52,7 +52,8 @@ public class AnnotatedCollection_Impl  implements AnnotatedCollection, SharedRes
 			BufferedReader reader = new BufferedReader(new InputStreamReader(inStr));
 			String line;
 			while ((line = reader.readLine()) != null) {
-				add(line.trim());
+			  if(!line.isEmpty())
+			    add(line.trim());
 			}
 		} catch (IOException e) {
 			throw new ResourceInitializationException(e);

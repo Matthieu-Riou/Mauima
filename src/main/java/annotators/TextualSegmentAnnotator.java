@@ -15,9 +15,11 @@ public class TextualSegmentAnnotator extends JCasAnnotator_ImplBase {
 		ArrayList<Character> digits = new ArrayList<Character>();
 		for (Character i = '0'; i != '9'+1; ++i)
 			digits.add(i);
+		
 		ArrayList<Character> caps = new ArrayList<Character>();
 		for (Character i = 'A'; i != 'Z' + 1; ++i)
 			caps.add(i);
+		
 		String text = jCas.getDocumentText() + " ";
 		int pred = 0;
 		boolean skip = false;
@@ -33,10 +35,17 @@ public class TextualSegmentAnnotator extends JCasAnnotator_ImplBase {
 				pred = i+2;
 				skip = true;
 			}
-			else if (text.charAt(i) == '\n' && caps.contains(text.charAt(i+1))) {
-				TextualSegment seg = new TextualSegment(jCas, pred, i);
-				seg.addToIndexes();
-				pred = i+1;
+			else if (text.charAt(i) == '\n' && caps.contains(text.charAt(i+1)) || text.charAt(i) == ':') {
+			  if (text.charAt(i-1) == ' ') {
+          TextualSegment seg = new TextualSegment(jCas, pred, i-1);
+          seg.addToIndexes();
+          pred = i+1;
+        }
+        else {
+            TextualSegment seg = new TextualSegment(jCas, pred, i);
+            seg.addToIndexes();
+            pred = i+1;
+        }
 			}
 			else if (!digit_read && digits.contains(text.charAt(i))) {
 				TextualSegment seg = new TextualSegment(jCas, pred, i);

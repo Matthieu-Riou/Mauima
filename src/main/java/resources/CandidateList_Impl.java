@@ -37,12 +37,21 @@ public class CandidateList_Impl implements CandidateList, SharedResourceObject {
     }
     for (TreeMap<String, Candidate> cMap : allCandidates_) {
       String s = "";
+      
+      int cpt = 0;
       for (String n : cMap.keySet()) {
+        if(cpt > 0) {
+          s+= ";";
+        }
+        
         Candidate c = cMap.get(n);
         s += c.getName() + ":" + c.getTerm_frequency() + ":" + c.getDocument_frequency() + ":"
                 + c.getInverse_document_frequency() + ":" + c.getFirst_occurrence() + ":"
-                + c.getLast_occurrence() + ";";
+                + c.getLast_occurrence();
+        
+        cpt++;
       }
+      
       out.println(s);
     }
     out.close();
