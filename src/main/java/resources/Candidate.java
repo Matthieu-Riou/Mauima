@@ -1,8 +1,7 @@
 package resources;
 
 public class Candidate {
-	
-	String name;
+  String name;
 	int term_frequency;
 	int document_frequency;
 	int inverse_document_frequency;
@@ -58,4 +57,29 @@ public class Candidate {
 	public void setLast_occurrence(int last_occurrence) {
 		this.last_occurrence = last_occurrence;
 	}
+	
+	@Override
+  public int hashCode() {
+    final int prime = 31;
+    int result = 1;
+    result = prime * result + ((name == null) ? 0 : name.hashCode());
+    return result;
+  }
+
+  @Override
+  public boolean equals(Object obj) {
+    if (this == obj)
+      return true;
+    if (obj == null)
+      return false;
+    if (getClass() != obj.getClass())
+      return false;
+    Candidate other = (Candidate) obj;
+    if (name == null) {
+      if (other.name != null)
+        return false;
+    } else if (!name.equals(other.name))
+      return false;
+    return true;
+  }
 }

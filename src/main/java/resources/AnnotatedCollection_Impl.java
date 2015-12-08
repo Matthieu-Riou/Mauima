@@ -5,9 +5,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 import org.apache.uima.resource.DataResource;
 import org.apache.uima.resource.ResourceInitializationException;
@@ -15,15 +13,15 @@ import org.apache.uima.resource.SharedResourceObject;
 
 public class AnnotatedCollection_Impl  implements AnnotatedCollection, SharedResourceObject  {
 	
-	protected List<Set<Candidate>> documents;
+	protected List<List<Candidate>> documents;
 
-	public List<Set<Candidate>> getDocuments() {
+	public List<List<Candidate>> getDocuments() {
 		return documents;
 	}
 	
 	protected void add(String line)
 	{
-		Set<Candidate> candidates = new HashSet<Candidate>();
+		List<Candidate> candidates = new ArrayList<Candidate>();
 		String[] splits = line.split(";");
 		
 		for(String c : splits)
@@ -49,7 +47,7 @@ public class AnnotatedCollection_Impl  implements AnnotatedCollection, SharedRes
 		try {
 			inStr = aData.getInputStream();
 		
-			documents = new ArrayList<Set<Candidate>>();
+			documents = new ArrayList<List<Candidate>>();
 			
 			BufferedReader reader = new BufferedReader(new InputStreamReader(inStr));
 			String line;
