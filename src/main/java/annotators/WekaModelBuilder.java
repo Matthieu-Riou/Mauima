@@ -2,29 +2,18 @@ package annotators;
 
 
 import java.util.ArrayList;
-import java.util.List;
 
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
 import org.apache.uima.fit.component.JCasAnnotator_ImplBase;
-import org.apache.uima.fit.descriptor.ExternalResource;
 import org.apache.uima.jcas.JCas;
 
-import resources.AnnotatedCollection;
-import resources.Candidate;
-
-import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
-
 import resources.FeaturesMap;
-import weka.core.Attribute;
-import weka.core.Capabilities;
-import weka.core.FastVector;
-import weka.core.Instance;
-import weka.core.Instances;
-import weka.core.Utils;
-import weka.core.Capabilities.Capability;
-import weka.filters.Filter;
 import weka.classifiers.Classifier;
 import weka.classifiers.meta.Bagging;
+import weka.core.Attribute;
+import weka.core.FastVector;
+import weka.core.Instances;
+import weka.core.Utils;
 
 public class WekaModelBuilder extends JCasAnnotator_ImplBase {
 	
@@ -77,7 +66,13 @@ public class WekaModelBuilder extends JCasAnnotator_ImplBase {
 			System.out.println("Error while building the classifier");
 		}
 		//TODO dump model in file 
-		//check for http://weka.sourceforge.net/doc.dev/weka/classifiers/misc/SerializedClassifier.html
+		//check for https://weka.wikispaces.com/Serialization
+		try {
+      weka.core.SerializationHelper.write("target/m5p.model", classifier);
+    } catch (Exception e) {
+      // TODO Auto-generated catch block
+      e.printStackTrace();
+    }
 	}
 }
 
