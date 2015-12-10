@@ -22,5 +22,12 @@ public class FeaturesMap {
 		this.lastOccurence = lastOccurence;
 		this.spread = spread;
 	}
+
+  @Override
+  public String toString() {
+    return "FeaturesMap [nb_of_features=" + nb_of_features + ", tf=" + tf + ", df=" + df + ", idf="
+            + idf + ", tfidf=" + tfidf + ", firstOccurence=" + firstOccurence + ", lastOccurence="
+            + lastOccurence + ", spread=" + spread + "]";
+  }
 }
 
