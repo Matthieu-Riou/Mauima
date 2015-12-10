@@ -34,7 +34,7 @@ public class FeaturesAnnotator extends JCasAnnotator_ImplBase {
         double tfidf = tf * idf;
         int firstOccurrence = c.getFirst_occurrence(); // 4
         int lastOccurrence = c.getLast_occurrence(); // 5
-        int spread = lastOccurrence - firstOccurrence;
+        int spread = lastOccurrence - firstOccurrence; // 6
         lf.add(new FeaturesMap(tf, df, idf, tfidf, firstOccurrence, lastOccurrence, spread));
         //System.out.println(c.getName() + " - Tf-idf : " + tfidf);
       }
