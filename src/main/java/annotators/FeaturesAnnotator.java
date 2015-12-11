@@ -24,7 +24,6 @@ public class FeaturesAnnotator extends JCasAnnotator_ImplBase {
 
   @Override
   public void process(JCas jCas) throws AnalysisEngineProcessException {
-    // TODO Auto-generated method stub
     for (List<Candidate> candidates : collection.getDocuments()) {
       ArrayList<FeaturesMap> lf = new ArrayList<FeaturesMap>();
       for (Candidate c : candidates) {
