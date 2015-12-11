@@ -15,6 +15,7 @@ import org.apache.uima.resource.ExternalResourceDescription;
 import resources.AnnotatedCollection_Impl;
 import resources.FeaturesList_Impl;
 import annotators.FeaturesAnnotator;
+import annotators.WekaModelBuilder;
 
 public class ModelCreator {
 	
@@ -25,11 +26,17 @@ public class ModelCreator {
 		         new File("features.bin"));
 		System.out.println("Loaded");
 		
-		AnalysisEngineDescription aed = createEngineDescription(FeaturesAnnotator.class,
+		AnalysisEngineDescription ae_Features = createEngineDescription(FeaturesAnnotator.class,
 		        FeaturesAnnotator.CANDIDATE_KEY,
 		        candidatesResourceDesc,
 		        FeaturesAnnotator.FEATURES_KEY,
 		        featuresResourceDesc);
+		
+		AnalysisEngineDescription ae_Model = createEngineDescription(WekaModelBuilder.class,
+		        WekaModelBuilder.FEATURES_KEY,
+		        featuresResourceDesc);
+		
+		AnalysisEngineDescription aed = createEngineDescription(ae_Features, ae_Model);
 		
 		AnalysisEngine ae = createEngine(aed);
 		

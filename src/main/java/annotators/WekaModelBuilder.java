@@ -5,8 +5,10 @@ import java.util.ArrayList;
 
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
 import org.apache.uima.fit.component.JCasAnnotator_ImplBase;
+import org.apache.uima.fit.descriptor.ExternalResource;
 import org.apache.uima.jcas.JCas;
 
+import resources.FeaturesList;
 import resources.FeaturesMap;
 import weka.classifiers.Classifier;
 import weka.classifiers.meta.Bagging;
@@ -17,10 +19,19 @@ import weka.core.Utils;
 
 public class WekaModelBuilder extends JCasAnnotator_ImplBase {
 	
+	public final static String FEATURES_KEY = "featuresKey";
+	@ExternalResource(key = FEATURES_KEY)
+	private FeaturesList featuresList_;
+	  
 	private ArrayList<FeaturesMap> loadInstances(){
 		//TODO read features and set their values in a FeaturesMap object
 		ArrayList<FeaturesMap> instances = new ArrayList<FeaturesMap>();
-		instances.add(new FeaturesMap(1, 1, 1.0, 1.0, 1, 1, 1)); // this line for test purpose
+		
+		for(ArrayList<FeaturesMap> e : featuresList_.getFeaturesList())
+		{
+			instances.addAll(e);
+		}
+		
 		// read instances here
 		return instances;
 	}
@@ -52,6 +63,11 @@ public class WekaModelBuilder extends JCasAnnotator_ImplBase {
 		Instances classifierData = new Instances("ClassifierData", attributes, 0);
 		classifierData.setClassIndex(numFeatures);
 		
+		for(FeaturesMap f : instances)
+		{
+			classifierData.add(f.toInstance());
+		}
+		
 		Classifier classifier = new Bagging();
 		try {
 			classifier.setOptions(Utils.splitOptions("-P 100 -S 1 -I 10 -W weka.classifiers.trees.M5P -- -U -M 7.0"));
@@ -63,7 +79,7 @@ public class WekaModelBuilder extends JCasAnnotator_ImplBase {
 			classifier.buildClassifier(classifierData);
 		} catch (Exception e) {
 			//TODO
-			System.out.println("Error while building the classifier");
+			System.out.println("Error while building the classifier : " + e.getMessage());
 		}
 		//TODO dump model in file 
 		//check for https://weka.wikispaces.com/Serialization

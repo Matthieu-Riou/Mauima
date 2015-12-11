@@ -1,5 +1,7 @@
 package resources;
 
+import weka.core.Instance;
+
 public class FeaturesMap {
 	// Utilitarian class used to store features needed for the construction of the WEKA model
 
@@ -11,6 +13,7 @@ public class FeaturesMap {
 	public int firstOccurence;
 	public int lastOccurence;
 	public int spread;
+	public int class_;
 	
 	public FeaturesMap(int tf, int df, double idf, double tfidf, int firstOccurence, int lastOccurence, int spread) {
 		this.nb_of_features = 7;
@@ -21,6 +24,14 @@ public class FeaturesMap {
 		this.firstOccurence = firstOccurence;
 		this.lastOccurence = lastOccurence;
 		this.spread = spread;
+		this.class_ = 1;
+	}
+	
+	public Instance toInstance()
+	{
+		double[] vals = {tf, df, idf, tfidf, firstOccurence, lastOccurence, spread, class_};
+		
+		return new Instance(1, vals);
 	}
 
   @Override
