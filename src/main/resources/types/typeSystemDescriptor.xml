@@ -22,5 +22,47 @@
                 </featureDescription>
             </features>
         </typeDescription>
+        <typeDescription>
+			      <name>types.Candidate</name>
+			      <description>candidate</description>
+			      <supertypeName>uima.tcas.Annotation</supertypeName>
+			      <features>
+			        <featureDescription>
+			          <name>frequency</name>
+			          <description>the frequency of the candidate</description>
+			          <rangeTypeName>uima.cas.Integer</rangeTypeName>
+			        </featureDescription>
+			        <featureDescription>
+			          <name>last_occ</name>
+			          <description>last occurence of the candidate</description>
+			          <rangeTypeName>uima.cas.Integer</rangeTypeName>
+			        </featureDescription>
+			        <featureDescription>
+			          <name>name</name>
+			          <description>the topic title of the candidate</description>
+			          <rangeTypeName>uima.cas.String</rangeTypeName>
+			        </featureDescription>
+			        <featureDescription>
+			          <name>tf</name>
+			          <description>term frequency</description>
+			          <rangeTypeName>uima.cas.Integer</rangeTypeName>
+			        </featureDescription>
+			        <featureDescription>
+			          <name>df</name>
+			          <description>document frequency</description>
+			          <rangeTypeName>uima.cas.Integer</rangeTypeName>
+			        </featureDescription>
+			        <featureDescription>
+			          <name>idf</name>
+			          <description>inverse document frequency</description>
+			          <rangeTypeName>uima.cas.Integer</rangeTypeName>
+			        </featureDescription>
+			        <featureDescription>
+			          <name>first_occ</name>
+			          <description>first occurence of the candidate</description>
+			          <rangeTypeName>uima.cas.Integer</rangeTypeName>
+			        </featureDescription>
+			      </features>
+	    	</typeDescription>
     </types>
 </typeSystemDescription>
