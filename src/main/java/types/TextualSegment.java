@@ -11,8 +11,8 @@ import org.apache.uima.jcas.tcas.Annotation;
 
 
 /** textual segment delemited by syntaxical boundary
- * Updated by JCasGen Fri Nov 20 16:31:52 CET 2015
- * XML source: /comptes/E114886B/Mauima/src/main/resources/types/typeSystemDescriptor.xml
+ * Updated by JCasGen Thu Dec 17 15:16:02 CET 2015
+ * XML source: /comptes/E103642E/Documents/2015-2016/DeveloppementLogiciel/atal2.dlp/workspace/Mauima/src/main/resources/types/typeSystemDescriptor.xml
  * @generated */
 public class TextualSegment extends Annotation {
   /** @generated

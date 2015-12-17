@@ -14,7 +14,7 @@ import org.apache.uima.cas.Feature;
 import org.apache.uima.jcas.tcas.Annotation_Type;
 
 /** candidate
- * Updated by JCasGen Fri Nov 20 16:31:52 CET 2015
+ * Updated by JCasGen Thu Dec 17 15:16:02 CET 2015
  * @generated */
 public class Candidate_Type extends Annotation_Type {
   /** @generated 
@@ -174,19 +174,19 @@ public class Candidate_Type extends Annotation_Type {
    * @param addr low level Feature Structure reference
    * @return the feature value 
    */ 
-  public int getIdf(int addr) {
+  public double getIdf(int addr) {
         if (featOkTst && casFeat_idf == null)
       jcas.throwFeatMissing("idf", "types.Candidate");
-    return ll_cas.ll_getIntValue(addr, casFeatCode_idf);
+    return ll_cas.ll_getDoubleValue(addr, casFeatCode_idf);
   }
   /** @generated
    * @param addr low level Feature Structure reference
    * @param v value to set 
    */    
-  public void setIdf(int addr, int v) {
+  public void setIdf(int addr, double v) {
         if (featOkTst && casFeat_idf == null)
       jcas.throwFeatMissing("idf", "types.Candidate");
-    ll_cas.ll_setIntValue(addr, casFeatCode_idf, v);}
+    ll_cas.ll_setDoubleValue(addr, casFeatCode_idf, v);}
     
   
  
@@ -211,6 +211,54 @@ public class Candidate_Type extends Annotation_Type {
         if (featOkTst && casFeat_first_occ == null)
       jcas.throwFeatMissing("first_occ", "types.Candidate");
     ll_cas.ll_setIntValue(addr, casFeatCode_first_occ, v);}
+    
+  
+ 
+  /** @generated */
+  final Feature casFeat_effective_full_form;
+  /** @generated */
+  final int     casFeatCode_effective_full_form;
+  /** @generated
+   * @param addr low level Feature Structure reference
+   * @return the feature value 
+   */ 
+  public String getEffective_full_form(int addr) {
+        if (featOkTst && casFeat_effective_full_form == null)
+      jcas.throwFeatMissing("effective_full_form", "types.Candidate");
+    return ll_cas.ll_getStringValue(addr, casFeatCode_effective_full_form);
+  }
+  /** @generated
+   * @param addr low level Feature Structure reference
+   * @param v value to set 
+   */    
+  public void setEffective_full_form(int addr, String v) {
+        if (featOkTst && casFeat_effective_full_form == null)
+      jcas.throwFeatMissing("effective_full_form", "types.Candidate");
+    ll_cas.ll_setStringValue(addr, casFeatCode_effective_full_form, v);}
+    
+  
+ 
+  /** @generated */
+  final Feature casFeat_full_forms;
+  /** @generated */
+  final int     casFeatCode_full_forms;
+  /** @generated
+   * @param addr low level Feature Structure reference
+   * @return the feature value 
+   */ 
+  public int getFull_forms(int addr) {
+        if (featOkTst && casFeat_full_forms == null)
+      jcas.throwFeatMissing("full_forms", "types.Candidate");
+    return ll_cas.ll_getRefValue(addr, casFeatCode_full_forms);
+  }
+  /** @generated
+   * @param addr low level Feature Structure reference
+   * @param v value to set 
+   */    
+  public void setFull_forms(int addr, int v) {
+        if (featOkTst && casFeat_full_forms == null)
+      jcas.throwFeatMissing("full_forms", "types.Candidate");
+    ll_cas.ll_setRefValue(addr, casFeatCode_full_forms, v);}
     
   
 
@@ -246,12 +294,20 @@ public class Candidate_Type extends Annotation_Type {
     casFeatCode_df  = (null == casFeat_df) ? JCas.INVALID_FEATURE_CODE : ((FeatureImpl)casFeat_df).getCode();
 
  
-    casFeat_idf = jcas.getRequiredFeatureDE(casType, "idf", "uima.cas.Integer", featOkTst);
+    casFeat_idf = jcas.getRequiredFeatureDE(casType, "idf", "uima.cas.Double", featOkTst);
     casFeatCode_idf  = (null == casFeat_idf) ? JCas.INVALID_FEATURE_CODE : ((FeatureImpl)casFeat_idf).getCode();
 
  
     casFeat_first_occ = jcas.getRequiredFeatureDE(casType, "first_occ", "uima.cas.Integer", featOkTst);
     casFeatCode_first_occ  = (null == casFeat_first_occ) ? JCas.INVALID_FEATURE_CODE : ((FeatureImpl)casFeat_first_occ).getCode();
+
+ 
+    casFeat_effective_full_form = jcas.getRequiredFeatureDE(casType, "effective_full_form", "uima.cas.String", featOkTst);
+    casFeatCode_effective_full_form  = (null == casFeat_effective_full_form) ? JCas.INVALID_FEATURE_CODE : ((FeatureImpl)casFeat_effective_full_form).getCode();
+
+ 
+    casFeat_full_forms = jcas.getRequiredFeatureDE(casType, "full_forms", "uima.cas.StringList", featOkTst);
+    casFeatCode_full_forms  = (null == casFeat_full_forms) ? JCas.INVALID_FEATURE_CODE : ((FeatureImpl)casFeat_full_forms).getCode();
 
   }
 }

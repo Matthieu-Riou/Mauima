@@ -7,12 +7,13 @@ import org.apache.uima.jcas.JCas;
 import org.apache.uima.jcas.JCasRegistry;
 import org.apache.uima.jcas.cas.TOP_Type;
 
+import org.apache.uima.jcas.cas.StringList;
 import org.apache.uima.jcas.tcas.Annotation;
 
 
 /** candidate
- * Updated by JCasGen Fri Nov 20 16:31:52 CET 2015
- * XML source: /comptes/E114886B/Mauima/src/main/resources/types/typeSystemDescriptor.xml
+ * Updated by JCasGen Thu Dec 17 15:16:02 CET 2015
+ * XML source: /comptes/E103642E/Documents/2015-2016/DeveloppementLogiciel/atal2.dlp/workspace/Mauima/src/main/resources/types/typeSystemDescriptor.xml
  * @generated */
 public class Candidate extends Annotation {
   /** @generated
@@ -193,19 +194,19 @@ public class Candidate extends Annotation {
    * @generated
    * @return value of the feature 
    */
-  public int getIdf() {
+  public double getIdf() {
     if (Candidate_Type.featOkTst && ((Candidate_Type)jcasType).casFeat_idf == null)
       jcasType.jcas.throwFeatMissing("idf", "types.Candidate");
-    return jcasType.ll_cas.ll_getIntValue(addr, ((Candidate_Type)jcasType).casFeatCode_idf);}
+    return jcasType.ll_cas.ll_getDoubleValue(addr, ((Candidate_Type)jcasType).casFeatCode_idf);}
     
   /** setter for idf - sets inverse document frequency 
    * @generated
    * @param v value to set into the feature 
    */
-  public void setIdf(int v) {
+  public void setIdf(double v) {
     if (Candidate_Type.featOkTst && ((Candidate_Type)jcasType).casFeat_idf == null)
       jcasType.jcas.throwFeatMissing("idf", "types.Candidate");
-    jcasType.ll_cas.ll_setIntValue(addr, ((Candidate_Type)jcasType).casFeatCode_idf, v);}    
+    jcasType.ll_cas.ll_setDoubleValue(addr, ((Candidate_Type)jcasType).casFeatCode_idf, v);}    
    
     
   //*--------------*
@@ -228,6 +229,50 @@ public class Candidate extends Annotation {
     if (Candidate_Type.featOkTst && ((Candidate_Type)jcasType).casFeat_first_occ == null)
       jcasType.jcas.throwFeatMissing("first_occ", "types.Candidate");
     jcasType.ll_cas.ll_setIntValue(addr, ((Candidate_Type)jcasType).casFeatCode_first_occ, v);}    
+   
+    
+  //*--------------*
+  //* Feature: effective_full_form
+
+  /** getter for effective_full_form - gets 
+   * @generated
+   * @return value of the feature 
+   */
+  public String getEffective_full_form() {
+    if (Candidate_Type.featOkTst && ((Candidate_Type)jcasType).casFeat_effective_full_form == null)
+      jcasType.jcas.throwFeatMissing("effective_full_form", "types.Candidate");
+    return jcasType.ll_cas.ll_getStringValue(addr, ((Candidate_Type)jcasType).casFeatCode_effective_full_form);}
+    
+  /** setter for effective_full_form - sets  
+   * @generated
+   * @param v value to set into the feature 
+   */
+  public void setEffective_full_form(String v) {
+    if (Candidate_Type.featOkTst && ((Candidate_Type)jcasType).casFeat_effective_full_form == null)
+      jcasType.jcas.throwFeatMissing("effective_full_form", "types.Candidate");
+    jcasType.ll_cas.ll_setStringValue(addr, ((Candidate_Type)jcasType).casFeatCode_effective_full_form, v);}    
+   
+    
+  //*--------------*
+  //* Feature: full_forms
+
+  /** getter for full_forms - gets 
+   * @generated
+   * @return value of the feature 
+   */
+  public StringList getFull_forms() {
+    if (Candidate_Type.featOkTst && ((Candidate_Type)jcasType).casFeat_full_forms == null)
+      jcasType.jcas.throwFeatMissing("full_forms", "types.Candidate");
+    return (StringList)(jcasType.ll_cas.ll_getFSForRef(jcasType.ll_cas.ll_getRefValue(addr, ((Candidate_Type)jcasType).casFeatCode_full_forms)));}
+    
+  /** setter for full_forms - sets  
+   * @generated
+   * @param v value to set into the feature 
+   */
+  public void setFull_forms(StringList v) {
+    if (Candidate_Type.featOkTst && ((Candidate_Type)jcasType).casFeat_full_forms == null)
+      jcasType.jcas.throwFeatMissing("full_forms", "types.Candidate");
+    jcasType.ll_cas.ll_setRefValue(addr, ((Candidate_Type)jcasType).casFeatCode_full_forms, jcasType.ll_cas.ll_getFSRef(v));}    
   }
 
     
