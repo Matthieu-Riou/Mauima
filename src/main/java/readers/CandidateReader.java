@@ -2,7 +2,6 @@ package readers;
 
 import java.io.IOException;
 import java.util.List;
-import java.util.TreeMap;
 
 import org.apache.uima.UimaContext;
 import org.apache.uima.collection.CollectionException;
@@ -16,8 +15,6 @@ import org.apache.uima.util.ProgressImpl;
 
 import resources.AnnotatedCollection;
 import resources.Candidate;
-
-import types.Candidate;
 
 
 public class CandidateReader extends JCasCollectionReader_ImplBase {
@@ -40,7 +37,7 @@ public class CandidateReader extends JCasCollectionReader_ImplBase {
 				mandatory = false, defaultValue = "en")
 		private String language;
 	
-	public static final String PARAM_DIRECTORY = "url";
+	public static final String PARAM_DIRECTORY = "key_directory";
 	@ConfigurationParameter(
 	name = PARAM_DIRECTORY,
 	description = "The directory containing the key files",
