@@ -55,14 +55,24 @@
 			        <featureDescription>
 			          <name>idf</name>
 			          <description>inverse document frequency</description>
-			          <rangeTypeName>uima.cas.Integer</rangeTypeName>
+			          <rangeTypeName>uima.cas.Double</rangeTypeName>
 			        </featureDescription>
 			        <featureDescription>
 			          <name>first_occ</name>
 			          <description>first occurence of the candidate</description>
 			          <rangeTypeName>uima.cas.Integer</rangeTypeName>
 			        </featureDescription>
-			      </features>
+			      <featureDescription>
+          <name>effective_full_form</name>
+          <description/>
+          <rangeTypeName>uima.cas.String</rangeTypeName>
+        </featureDescription>
+        <featureDescription>
+          <name>full_forms</name>
+          <description/>
+          <rangeTypeName>uima.cas.StringList</rangeTypeName>
+        </featureDescription>
+      </features>
 	    	</typeDescription>
     </types>
 </typeSystemDescription>
