@@ -14,7 +14,7 @@ import org.apache.uima.cas.Feature;
 import org.apache.uima.jcas.tcas.Annotation_Type;
 
 /** candidate
- * Updated by JCasGen Thu Dec 17 15:16:02 CET 2015
+ * Updated by JCasGen Thu Dec 17 15:31:38 CET 2015
  * @generated */
 public class Candidate_Type extends Annotation_Type {
   /** @generated 
