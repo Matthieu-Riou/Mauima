@@ -14,7 +14,7 @@ import org.apache.uima.cas.Feature;
 import org.apache.uima.jcas.tcas.Annotation_Type;
 
 /** 
- * Updated by JCasGen Thu Dec 17 15:31:38 CET 2015
+ * Updated by JCasGen Thu Dec 17 16:00:48 CET 2015
  * @generated */
 public class Features_Type extends Annotation_Type {
   /** @generated 
@@ -213,6 +213,30 @@ public class Features_Type extends Annotation_Type {
     ll_cas.ll_setIntValue(addr, casFeatCode_spread, v);}
     
   
+ 
+  /** @generated */
+  final Feature casFeat_class_;
+  /** @generated */
+  final int     casFeatCode_class_;
+  /** @generated
+   * @param addr low level Feature Structure reference
+   * @return the feature value 
+   */ 
+  public int getClass_(int addr) {
+        if (featOkTst && casFeat_class_ == null)
+      jcas.throwFeatMissing("class_", "types.Features");
+    return ll_cas.ll_getIntValue(addr, casFeatCode_class_);
+  }
+  /** @generated
+   * @param addr low level Feature Structure reference
+   * @param v value to set 
+   */    
+  public void setClass_(int addr, int v) {
+        if (featOkTst && casFeat_class_ == null)
+      jcas.throwFeatMissing("class_", "types.Features");
+    ll_cas.ll_setIntValue(addr, casFeatCode_class_, v);}
+    
+  
 
 
 
@@ -252,6 +276,10 @@ public class Features_Type extends Annotation_Type {
  
     casFeat_spread = jcas.getRequiredFeatureDE(casType, "spread", "uima.cas.Integer", featOkTst);
     casFeatCode_spread  = (null == casFeat_spread) ? JCas.INVALID_FEATURE_CODE : ((FeatureImpl)casFeat_spread).getCode();
+
+ 
+    casFeat_class_ = jcas.getRequiredFeatureDE(casType, "class_", "uima.cas.Integer", featOkTst);
+    casFeatCode_class_  = (null == casFeat_class_) ? JCas.INVALID_FEATURE_CODE : ((FeatureImpl)casFeat_class_).getCode();
 
   }
 }

@@ -11,7 +11,7 @@ import org.apache.uima.jcas.tcas.Annotation;
 
 
 /** 
- * Updated by JCasGen Thu Dec 17 15:31:38 CET 2015
+ * Updated by JCasGen Thu Dec 17 16:00:48 CET 2015
  * XML source: /comptes/E103642E/Documents/2015-2016/DeveloppementLogiciel/atal2.dlp/workspace/Mauima/src/main/resources/types/typeSystemDescriptor.xml
  * @generated */
 public class Features extends Annotation {
@@ -228,6 +228,28 @@ public class Features extends Annotation {
     if (Features_Type.featOkTst && ((Features_Type)jcasType).casFeat_spread == null)
       jcasType.jcas.throwFeatMissing("spread", "types.Features");
     jcasType.ll_cas.ll_setIntValue(addr, ((Features_Type)jcasType).casFeatCode_spread, v);}    
+   
+    
+  //*--------------*
+  //* Feature: class_
+
+  /** getter for class_ - gets 
+   * @generated
+   * @return value of the feature 
+   */
+  public int getClass_() {
+    if (Features_Type.featOkTst && ((Features_Type)jcasType).casFeat_class_ == null)
+      jcasType.jcas.throwFeatMissing("class_", "types.Features");
+    return jcasType.ll_cas.ll_getIntValue(addr, ((Features_Type)jcasType).casFeatCode_class_);}
+    
+  /** setter for class_ - sets  
+   * @generated
+   * @param v value to set into the feature 
+   */
+  public void setClass_(int v) {
+    if (Features_Type.featOkTst && ((Features_Type)jcasType).casFeat_class_ == null)
+      jcasType.jcas.throwFeatMissing("class_", "types.Features");
+    jcasType.ll_cas.ll_setIntValue(addr, ((Features_Type)jcasType).casFeatCode_class_, v);}    
   }
 
     
