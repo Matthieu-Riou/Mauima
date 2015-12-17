@@ -12,7 +12,7 @@ import org.apache.uima.jcas.tcas.Annotation;
 
 
 /** candidate
- * Updated by JCasGen Thu Dec 17 16:00:48 CET 2015
+ * Updated by JCasGen Thu Dec 17 16:29:38 CET 2015
  * XML source: /comptes/E103642E/Documents/2015-2016/DeveloppementLogiciel/atal2.dlp/workspace/Mauima/src/main/resources/types/typeSystemDescriptor.xml
  * @generated */
 public class Candidate extends Annotation {
@@ -273,6 +273,28 @@ public class Candidate extends Annotation {
     if (Candidate_Type.featOkTst && ((Candidate_Type)jcasType).casFeat_full_forms == null)
       jcasType.jcas.throwFeatMissing("full_forms", "types.Candidate");
     jcasType.ll_cas.ll_setRefValue(addr, ((Candidate_Type)jcasType).casFeatCode_full_forms, jcasType.ll_cas.ll_getFSRef(v));}    
+   
+    
+  //*--------------*
+  //* Feature: class_
+
+  /** getter for class_ - gets 
+   * @generated
+   * @return value of the feature 
+   */
+  public int getClass_() {
+    if (Candidate_Type.featOkTst && ((Candidate_Type)jcasType).casFeat_class_ == null)
+      jcasType.jcas.throwFeatMissing("class_", "types.Candidate");
+    return jcasType.ll_cas.ll_getIntValue(addr, ((Candidate_Type)jcasType).casFeatCode_class_);}
+    
+  /** setter for class_ - sets  
+   * @generated
+   * @param v value to set into the feature 
+   */
+  public void setClass_(int v) {
+    if (Candidate_Type.featOkTst && ((Candidate_Type)jcasType).casFeat_class_ == null)
+      jcasType.jcas.throwFeatMissing("class_", "types.Candidate");
+    jcasType.ll_cas.ll_setIntValue(addr, ((Candidate_Type)jcasType).casFeatCode_class_, v);}    
   }
 
     
