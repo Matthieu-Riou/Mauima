@@ -1,45 +1,33 @@
 package annotators;
 
-
-import java.util.ArrayList;
-
+import org.apache.uima.UimaContext;
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
 import org.apache.uima.fit.component.JCasAnnotator_ImplBase;
-import org.apache.uima.fit.descriptor.ExternalResource;
 import org.apache.uima.jcas.JCas;
+import org.apache.uima.resource.ResourceInitializationException;
 
-import resources.FeaturesList;
-import resources.FeaturesMap;
+import static org.apache.uima.fit.util.JCasUtil.select;
+import types.Features;
 import weka.classifiers.Classifier;
 import weka.classifiers.meta.Bagging;
 import weka.core.Attribute;
 import weka.core.FastVector;
+import weka.core.Instance;
 import weka.core.Instances;
 import weka.core.Utils;
 
 public class WekaModelBuilder extends JCasAnnotator_ImplBase {
 	
-	public final static String FEATURES_KEY = "featuresKey";
-	@ExternalResource(key = FEATURES_KEY)
-	private FeaturesList featuresList_;
-	  
-	private ArrayList<FeaturesMap> loadInstances(){
-		//TODO read features and set their values in a FeaturesMap object
-		ArrayList<FeaturesMap> instances = new ArrayList<FeaturesMap>();
-		
-		for(ArrayList<FeaturesMap> e : featuresList_.getFeaturesList())
-		{
-			instances.addAll(e);
-		}
-		
-		// read instances here
-		return instances;
-	}
+	Instances classifierData;
+	int indexClass = 7;
+	Classifier classifier;
 	
 	@Override
-	public void process(JCas jCas) throws AnalysisEngineProcessException {
-		ArrayList<FeaturesMap> instances = this.loadInstances();
-		int numFeatures = instances.get(0).nb_of_features; 
+	public void initialize(UimaContext context)
+			throws ResourceInitializationException {
+		// TODO Auto-generated method stub
+		super.initialize(context);
+		
 		Boolean nominalClassValue = false;
 		FastVector attributes = new FastVector();
 		
@@ -59,17 +47,33 @@ public class WekaModelBuilder extends JCasAnnotator_ImplBase {
 		} else {
 			attributes.addElement(new Attribute("Keyphrase?"));
 		}
+	
+		classifierData = new Instances("ClassifierData", attributes, 0);
+		classifierData.setClassIndex(indexClass);
 		
-		Instances classifierData = new Instances("ClassifierData", attributes, 0);
-		classifierData.setClassIndex(numFeatures);
-		
-		for(FeaturesMap f : instances)
-		{
-			classifierData.add(f.toInstance());
+		classifier = new Bagging();
+	}
+
+	@Override
+	public void process(JCas jCas) throws AnalysisEngineProcessException {
+
+		for(Features f : select(jCas, Features.class))
+		{	
+			double[] vals = {f.getTf(), f.getDf(), f.getIdf(), f.getTfidf(), f.getFirst_occurrence(), f.getLast_occurrence(), f.getSpread(), f.getClass_()};
+			
+			classifierData.add(new Instance(1, vals));
 		}
 		
-		Classifier classifier = new Bagging();
-		try {
+	}
+	
+	@Override
+	  public void collectionProcessComplete() throws AnalysisEngineProcessException {
+	    // TODO Auto-generated method stub
+	    super.collectionProcessComplete();
+	    
+	    System.out.println("Collection Process Complete --> build model...");
+	    
+	    try {
 			classifier.setOptions(Utils.splitOptions("-P 100 -S 1 -I 10 -W weka.classifiers.trees.M5P -- -U -M 7.0"));
 		} catch (Exception e) {
 			//TODO
@@ -81,14 +85,19 @@ public class WekaModelBuilder extends JCasAnnotator_ImplBase {
 			//TODO
 			System.out.println("Error while building the classifier : " + e.getMessage());
 		}
-		//TODO dump model in file 
-		//check for https://weka.wikispaces.com/Serialization
-		try {
-      weka.core.SerializationHelper.write("target/m5p.model", classifier);
-    } catch (Exception e) {
-      // TODO Auto-generated catch block
-      e.printStackTrace();
-    }
-	}
+	    
+	    System.out.println("Collection Process Complete --> saving model...");
+	    
+	  //TODO dump model in file 
+  		//check for https://weka.wikispaces.com/Serialization
+  		try {
+	        weka.core.SerializationHelper.write("target/m5p.model", classifier);
+	      } catch (Exception e) {
+	        // TODO Auto-generated catch block
+	        e.printStackTrace();
+	      }
+	  		
+	    System.out.println("Model successfully saved to target/m5p.model");
+	  }
 }
 
