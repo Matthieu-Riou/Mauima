@@ -1,46 +1,35 @@
 package annotators;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
 import org.apache.uima.fit.component.JCasAnnotator_ImplBase;
-import org.apache.uima.fit.descriptor.ExternalResource;
 import org.apache.uima.jcas.JCas;
 
-import resources.AnnotatedCollection;
-import resources.Candidate;
-import resources.FeaturesList;
-import resources.FeaturesMap;
+import static org.apache.uima.fit.util.JCasUtil.select;
+
+import types.Candidate;
+import types.Features;
 
 public class FeaturesAnnotator extends JCasAnnotator_ImplBase {
-  public final static String CANDIDATE_KEY = "candidateKey";
-  @ExternalResource(key = CANDIDATE_KEY)
-  private AnnotatedCollection collection;
-  
-  public final static String FEATURES_KEY = "featuresKey";
-  @ExternalResource(key = FEATURES_KEY)
-  private FeaturesList featuresList_;
 
   @Override
   public void process(JCas jCas) throws AnalysisEngineProcessException {
-    for (List<Candidate> candidates : collection.getDocuments()) {
-      ArrayList<FeaturesMap> lf = new ArrayList<FeaturesMap>();
-      for (Candidate c : candidates) {
-        int tf = c.getTerm_frequency(); // 1
-        int df = c.getDocument_frequency(); // 2
-        double idf = c.getInverse_document_frequency(); // 3
-        double tfidf = tf * idf;
-        int firstOccurrence = c.getFirst_occurrence(); // 4
-        int lastOccurrence = c.getLast_occurrence(); // 5
-        int spread = lastOccurrence - firstOccurrence; // 6
-        lf.add(new FeaturesMap(tf, df, idf, tfidf, firstOccurrence, lastOccurrence, spread));
-        //System.out.println(c.getName() + " - Tf-idf : " + tfidf);
-      }
-      featuresList_.getFeaturesList().add(lf);
-      //System.out.println(lf);
-    }
+
+	  for (Candidate c : select(jCas, Candidate.class)) 
+	  { 
+		Features features = new Features(jCas);
+		
+		features.setTf(c.getTf()); // 1
+	    features.setDf(c.getDf()); // 2
+	    features.setIdf(c.getIdf()); // 3
+	    features.setTfidf(features.getTf() * features.getIdf());
+	    features.setFirst_occurrence(c.getFirst_occ()); // 4
+	    features.setLast_occurrence(c.getLast_occ()); // 5
+	    features.setSpread(features.getLast_occurrence() - features.getFirst_occurrence()); // 6
+	    
+	    features.addToIndexes();
+	    //System.out.println(c.getName() + " - Tf-idf : " + tfidf);
+	  }
 
   }
-
+  
 }
