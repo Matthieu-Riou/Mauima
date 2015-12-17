@@ -33,7 +33,7 @@ public class ModelCreator {
 				CandidateReader.CANDIDATE_KEY,
 		        candidatesResourceDesc,
 		        CandidateReader.PARAM_DIRECTORY,
-		        "train/keys/"
+		        "src/main/resources/train/keys/"
 				);
 		
 		AnalysisEngineDescription ae_Features = createEngineDescription(FeaturesAnnotator.class);
