@@ -3,7 +3,6 @@ package annotators;
 import static org.apache.uima.fit.util.JCasUtil.select;
 import static org.apache.uima.fit.util.JCasUtil.selectCovered;
 
-import java.util.ArrayList;
 import java.util.TreeMap;
 
 import org.apache.uima.UimaContext;
