@@ -14,6 +14,7 @@ import org.apache.uima.resource.SharedResourceObject;
 public class AnnotatedCollection_Impl  implements AnnotatedCollection, SharedResourceObject  {
 	
 	protected List<List<Candidate>> documents;
+	protected ArrayList<String> filenames_ = new ArrayList<String>();
 
 	public List<List<Candidate>> getDocuments() {
 		return documents;
@@ -22,10 +23,18 @@ public class AnnotatedCollection_Impl  implements AnnotatedCollection, SharedRes
 	protected void add(String line)
 	{
 		List<Candidate> candidates = new ArrayList<Candidate>();
+		
 		String[] splits = line.split(";");
+		filenames_.add(splits[0]);
+		
+		boolean once = false;
 		
 		for(String c : splits)
 		{
+		  if (!once) {
+		    once = true;
+		    continue;
+		  }
 			String[] values = c.split(":");
 			Candidate candidate = new Candidate(values[0]);
 			
@@ -48,6 +57,7 @@ public class AnnotatedCollection_Impl  implements AnnotatedCollection, SharedRes
 			inStr = aData.getInputStream();
 		
 			documents = new ArrayList<List<Candidate>>();
+			//filenames_ = new ArrayList<String>();
 			
 			BufferedReader reader = new BufferedReader(new InputStreamReader(inStr));
 			String line;
@@ -66,4 +76,16 @@ public class AnnotatedCollection_Impl  implements AnnotatedCollection, SharedRes
 			}
 		}
 	}
+
+	public ArrayList<String> getAllFilenames(){
+    return filenames_;
+  }
+  
+  public String getFilename(int index) {
+    if (index >= filenames_.size())
+      index = filenames_.size()-1;
+    else if (index < 0)
+      index = 0;
+    return filenames_.get(index);
+  }
 }
