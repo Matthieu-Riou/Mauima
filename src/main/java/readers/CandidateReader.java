@@ -1,5 +1,7 @@
 package readers;
 
+import java.io.BufferedReader;
+import java.io.FileReader;
 import java.io.IOException;
 import java.util.List;
 
@@ -61,12 +63,37 @@ public class CandidateReader extends JCasCollectionReader_ImplBase {
 	public boolean hasNext() throws IOException, CollectionException {
 		return i < size;
 	}
+	
+	public int computeClass(resources.Candidate candidate, String documentName)
+	{
+		try
+		{
+			BufferedReader readerFile = new BufferedReader(new FileReader(directory_dir+documentName.replaceAll(".txt", ".keys")));
+			String line;
+			 while((line = readerFile.readLine()) != null){
+				 String[] splits = line.split("\t");
+				 
+				 System.out.println(candidate.getFullForms());
+				 if(candidate.getFullForms().containsKey(splits[0]))
+				 {
+					 return 1;
+				 }
+			 }
+		}
+		catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return 0;
+	}
 
 	@Override
 	public void getNext(JCas jcas) throws IOException, CollectionException {
 		jcas.setDocumentLanguage(language);
 		
 		List<Candidate> document = collection.getDocuments().get(i);
+		String documentName = collection.getFilename(i);
 		
 		for(resources.Candidate c : document)
 		{
@@ -78,6 +105,8 @@ public class CandidateReader extends JCasCollectionReader_ImplBase {
 			candidate.setIdf(c.getInverse_document_frequency());
 			candidate.setFirst_occ(c.getFirst_occurrence());
 			candidate.setLast_occ(c.getLast_occurrence());
+			System.out.println(c.getName() + " : " + Integer.toString(computeClass(c, documentName)));
+			candidate.setClass_(computeClass(c, documentName));
 			
 			candidate.addToIndexes();
 		}
