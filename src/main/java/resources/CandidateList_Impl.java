@@ -27,7 +27,7 @@ public class CandidateList_Impl implements CandidateList, SharedResourceObject {
     return allCandidates_;
   }
 
-  public void save(String filename) {
+  public void save(String filename, ArrayList<String> files) {
     PrintWriter out = null;
     try {
       out = new PrintWriter(filename);
@@ -36,7 +36,7 @@ public class CandidateList_Impl implements CandidateList, SharedResourceObject {
       e.printStackTrace();
     }
     for (TreeMap<String, Candidate> cMap : allCandidates_) {
-      String s = "";
+      String s = files.remove(0) + ";";
       
       int cpt = 0;
       for (String n : cMap.keySet()) {
@@ -51,8 +51,10 @@ public class CandidateList_Impl implements CandidateList, SharedResourceObject {
         
         cpt++;
       }
-      
-      out.println(s);
+      if (files.isEmpty())
+        out.print(s);
+      else
+        out.println(s);
     }
     out.close();
   }

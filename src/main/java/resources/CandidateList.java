@@ -6,5 +6,5 @@ import java.util.TreeMap;
 public interface CandidateList {
   ArrayList<TreeMap<String, Candidate>> getAllCandidates();
   
-  void save(String filename);
+  void save(String filename, ArrayList<String> files);
 }
