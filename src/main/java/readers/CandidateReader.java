@@ -94,9 +94,10 @@ public class CandidateReader extends JCasCollectionReader_ImplBase {
 		List<Candidate> document = collection.getDocuments().get(i);
 		String documentName = collection.getFilename(i);
 		
+		int cpt = 0;
 		for(resources.Candidate c : document)
 		{
-			types.Candidate candidate = new types.Candidate(jcas);
+			types.Candidate candidate = new types.Candidate(jcas, cpt, cpt);
 			candidate.setName(c.getName());
 			candidate.setEffective_full_form(c.getEffectiveFullForm());
 			candidate.setTf(c.getTerm_frequency());
@@ -108,6 +109,8 @@ public class CandidateReader extends JCasCollectionReader_ImplBase {
 			candidate.setClass_(computeClass(c, documentName));
 			
 			candidate.addToIndexes();
+			
+			cpt++;
 		}
 		
 		i++;

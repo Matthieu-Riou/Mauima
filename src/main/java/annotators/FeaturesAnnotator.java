@@ -16,7 +16,7 @@ public class FeaturesAnnotator extends JCasAnnotator_ImplBase {
 
 	  for (Candidate c : select(jCas, Candidate.class)) 
 	  { 
-		Features features = new Features(jCas);
+		Features features = new Features(jCas, c.getBegin(), c.getEnd());
 		
 		features.setTf(c.getTf()); // 1
 	    features.setDf(c.getDf()); // 2
