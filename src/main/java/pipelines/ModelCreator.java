@@ -25,8 +25,7 @@ public class ModelCreator {
 	public static void main(String[] args) throws Exception {
 		ExternalResourceDescription candidatesResourceDesc = createExternalResourceDescription(AnnotatedCollection_Impl.class,
 				 "file:target/candidates.txt");
-		ExternalResourceDescription featuresResourceDesc = createExternalResourceDescription(FeaturesList_Impl.class,
-		         new File("features.bin"));
+
 		System.out.println("Loaded");
 		
 		CollectionReader ae_Reader = createReader(CandidateReader.class,
