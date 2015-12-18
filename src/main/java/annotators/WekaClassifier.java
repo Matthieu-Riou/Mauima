@@ -46,10 +46,10 @@ class ProbaList {
 }
 
 public class WekaClassifier extends JCasAnnotator_ImplBase {
-  public static final String PARAM_MODEL = "max_model_";
+  public static final String PARAM_MODEL = "param_model_";
 
   @ConfigurationParameter(name = PARAM_MODEL)
-  private int min_model_;
+  private String param_model_;
 
   private ArrayList<Integer> sortCandidatesByProbabality(
           ArrayList<double[]> candidates_relevantness_probabilities) {
@@ -71,9 +71,9 @@ public class WekaClassifier extends JCasAnnotator_ImplBase {
     ArrayList<double[]> candidates_relevantness_probabilities = new ArrayList<double[]>();
     Classifier classifier = null;
     // Loading model from file
-    String model_file_name = "target/m5p.model";
+
     try {
-      classifier = (Classifier) weka.core.SerializationHelper.read(model_file_name); // ??
+      classifier = (Classifier) weka.core.SerializationHelper.read(param_model_); // ??
     } catch (Exception e) {
       // TODO Auto-generated catch block
       e.printStackTrace();
