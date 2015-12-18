@@ -69,7 +69,7 @@ public class CandidateReader extends JCasCollectionReader_ImplBase {
 	{
 		try
 		{
-			BufferedReader readerFile = new BufferedReader(new FileReader(directory_dir+documentName.replaceAll(".txt", ".keys")));
+			BufferedReader readerFile = new BufferedReader(new FileReader(directory_dir+documentName.replaceAll(".txt", ".key")));
 			String line;
 			 while((line = readerFile.readLine()) != null){
 				 String[] splits = line.split("\t");
@@ -79,6 +79,7 @@ public class CandidateReader extends JCasCollectionReader_ImplBase {
 					 return 1;
 				 }
 			 }
+			 readerFile.close();
 		}
 		catch (Exception e) {
 			// TODO Auto-generated catch block
