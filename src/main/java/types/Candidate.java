@@ -3,11 +3,10 @@
 /* First created by JCasGen Fri Nov 20 16:31:48 CET 2015 */
 package types;
 
-import org.apache.uima.jcas.JCas; 
+import org.apache.uima.jcas.JCas;
 import org.apache.uima.jcas.JCasRegistry;
-import org.apache.uima.jcas.cas.TOP_Type;
-
 import org.apache.uima.jcas.cas.StringList;
+import org.apache.uima.jcas.cas.TOP_Type;
 import org.apache.uima.jcas.tcas.Annotation;
 
 

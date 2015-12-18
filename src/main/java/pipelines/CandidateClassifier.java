@@ -15,7 +15,6 @@ import readers.CandidateReader;
 import resources.AnnotatedCollection_Impl;
 import annotators.FeaturesAnnotator;
 import annotators.WekaClassifier;
-import annotators.WekaModelBuilder;
 
 public class CandidateClassifier {
 

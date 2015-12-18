@@ -6,17 +6,13 @@ import static org.apache.uima.fit.factory.CollectionReaderFactory.createReader;
 import static org.apache.uima.fit.factory.ExternalResourceFactory.createExternalResourceDescription;
 import static org.apache.uima.fit.pipeline.SimplePipeline.runPipeline;
 
-import java.io.File;
-
 import org.apache.uima.analysis_engine.AnalysisEngine;
 import org.apache.uima.analysis_engine.AnalysisEngineDescription;
 import org.apache.uima.collection.CollectionReader;
-import org.apache.uima.jcas.JCas;
 import org.apache.uima.resource.ExternalResourceDescription;
 
 import readers.CandidateReader;
 import resources.AnnotatedCollection_Impl;
-import resources.FeaturesList_Impl;
 import annotators.FeaturesAnnotator;
 import annotators.WekaModelBuilder;
 

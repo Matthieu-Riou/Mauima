@@ -1,6 +1,9 @@
 package annotators;
 
-import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
+import static org.apache.uima.fit.util.JCasUtil.select;
+import static org.apache.uima.fit.util.JCasUtil.selectCovered;
+
+import java.util.ArrayList;
 
 import org.apache.uima.UimaContext;
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
@@ -11,11 +14,7 @@ import org.apache.uima.resource.ResourceInitializationException;
 
 import types.NGram;
 import types.TextualSegment;
-
-import java.util.ArrayList;
-
-import static org.apache.uima.fit.util.JCasUtil.select;
-import static org.apache.uima.fit.util.JCasUtil.selectCovered;
+import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 
 public class NGramAnnotator extends JCasAnnotator_ImplBase {
   public static final String PARAM_MIN_NGRAM_LENGTH = "min_ngram_length_";

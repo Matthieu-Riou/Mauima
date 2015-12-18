@@ -1,12 +1,13 @@
 package annotators;
 
+import static org.apache.uima.fit.util.JCasUtil.select;
+
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
 import org.apache.uima.fit.component.JCasAnnotator_ImplBase;
 import org.apache.uima.jcas.JCas;
 
-import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 import types.TextualSegment;
-import static org.apache.uima.fit.util.JCasUtil.select;
+import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 
 public class Tokenizer extends JCasAnnotator_ImplBase {
 	@Override

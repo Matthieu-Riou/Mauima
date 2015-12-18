@@ -28,7 +28,7 @@ public class WekaModelBuilder extends JCasAnnotator_ImplBase {
 		// TODO Auto-generated method stub
 		super.initialize(context);
 		
-		Boolean nominalClassValue = false;
+		Boolean nominalClassValue = true;
 		FastVector attributes = new FastVector();
 		
 		attributes.addElement(new Attribute("TF")); // 1

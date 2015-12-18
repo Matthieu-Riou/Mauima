@@ -16,8 +16,6 @@ import weka.core.FastVector;
 import weka.core.Instance;
 import weka.core.Instances;
 
-import utils.ProbaList;
-
 public class WekaClassifier extends JCasAnnotator_ImplBase {
   public static final String PARAM_MODEL = "param_model_";
 

@@ -11,6 +11,10 @@ public class ProbaList {
   }
 
   public double getElemAt(int index) {
+    if (index >= probabilities.length)
+      index = probabilities.length-1;
+    else if (index < 0)
+      index = 0;
     return this.probabilities[index];
   }
 
