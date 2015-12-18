@@ -47,7 +47,22 @@ public class CandidateList_Impl implements CandidateList, SharedResourceObject {
         Candidate c = cMap.get(n);
         s += c.getName() + ":" + c.getTerm_frequency() + ":" + c.getDocument_frequency() + ":"
                 + c.getInverse_document_frequency() + ":" + c.getFirst_occurrence() + ":"
-                + c.getLast_occurrence();
+                + c.getLast_occurrence() + ":" + c.getEffectiveFullForm() + ":";
+        
+        boolean once=true;
+        for(String full_form : c.getFullForms().keySet())
+        {
+        	if(!once)
+        	{
+        		s+= "///";
+        	}
+        	else
+        	{
+        		once = false;
+        	}
+        	
+        	s += full_form + "%%" + c.getFullForms().get(full_form);
+        }
         
         cpt++;
       }

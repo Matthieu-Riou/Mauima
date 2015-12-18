@@ -38,11 +38,18 @@ public class AnnotatedCollection_Impl  implements AnnotatedCollection, SharedRes
 			String[] values = c.split(":");
 			Candidate candidate = new Candidate(values[0]);
 			
+			for(String f : values[7].split("///"))
+			{
+				String[] f_split = f.split("%%");
+				candidate.addInformation(f_split[0], Integer.parseInt(f_split[1]));
+			}
+			
 			candidate.setTerm_frequency(Integer.parseInt(values[1]));
 			candidate.setDocument_frequency(Integer.parseInt(values[2]));
 			candidate.setInverse_document_frequency(Double.parseDouble(values[3]));
 			candidate.setFirst_occurrence(Integer.parseInt(values[4]));
 			candidate.setLast_occurrence(Integer.parseInt(values[5]));
+			candidate.setEffectiveFullForm(values[6]);
 			
 			candidates.add(candidate);
 		}
