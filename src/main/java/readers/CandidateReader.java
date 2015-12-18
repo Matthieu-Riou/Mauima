@@ -98,6 +98,8 @@ public class CandidateReader extends JCasCollectionReader_ImplBase {
 		Document doc_type = new Document(jcas, 0, 0);
 		doc_type.setDocumentName(documentName);
 		
+		doc_type.addToIndexes();
+		
 		int cpt = 1;
 		for(resources.Candidate c : document)
 		{

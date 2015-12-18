@@ -16,6 +16,7 @@ import org.apache.uima.jcas.JCas;
 import org.apache.uima.resource.ResourceInitializationException;
 
 import types.Candidate;
+import types.Document;
 import types.Features;
 import weka.classifiers.Classifier;
 import weka.classifiers.meta.Bagging;
@@ -23,7 +24,6 @@ import weka.core.Attribute;
 import weka.core.FastVector;
 import weka.core.Instance;
 import weka.core.Instances;
-
 import utils.ProbaList;
 
 
@@ -93,7 +93,10 @@ public class WekaClassifier extends JCasAnnotator_ImplBase {
   @Override
   public void process(JCas jCas) throws AnalysisEngineProcessException {
 	  
-	  System.out.println("File : ");
+	  Collection<Document> docs = select(jCas, Document.class);
+	  assert(docs.size() == 1);
+
+	  System.out.println("\n\nFile : " + docs.iterator().next().getDocumentName());
     // Input: jcas representing the list of candidates topics for a document, as a collection of
     // features
     // represented by a class Features
