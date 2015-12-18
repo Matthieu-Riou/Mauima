@@ -3,47 +3,20 @@ package annotators;
 import static org.apache.uima.fit.util.JCasUtil.select;
 
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Comparator;
 
 import org.apache.uima.analysis_component.JCasAnnotator_ImplBase;
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
 import org.apache.uima.fit.descriptor.ConfigurationParameter;
-import org.apache.uima.fit.descriptor.ExternalResource;
 import org.apache.uima.jcas.JCas;
 
-import resources.CandidateList;
-import resources.FeaturesMap;
 import types.Features;
-import types.TextualSegment;
 import weka.classifiers.Classifier;
-import weka.classifiers.meta.Bagging;
 import weka.core.Attribute;
 import weka.core.FastVector;
 import weka.core.Instance;
 import weka.core.Instances;
-import weka.core.SerializationHelper;
-import weka.core.Utils;
 
-class ProbaList {
-  double[] probabilities;
-
-  int index_to_compare;
-
-  public ProbaList(double[] probas) {
-    this.probabilities = probas;
-    this.index_to_compare = 0;
-  }
-
-  public double getElemAt(int index) {
-    return this.probabilities[index];
-  }
-
-  public int compare(ProbaList a, ProbaList b) {
-    return ((Double) a.getElemAt(index_to_compare)).compareTo((Double) b
-            .getElemAt(index_to_compare));
-  }
-}
+import utils.ProbaList;
 
 public class WekaClassifier extends JCasAnnotator_ImplBase {
   public static final String PARAM_MODEL = "param_model_";
