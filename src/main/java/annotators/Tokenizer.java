@@ -33,7 +33,7 @@ public class Tokenizer extends JCasAnnotator_ImplBase {
 					else
 						pred = i+1;
 				}
-				else if (text.charAt(i) == ',' || text.charAt(i) == ')') {
+				else if (text.charAt(i) == ',' || text.charAt(i) == ')'|| text.charAt(i) == ';') {
 					Token tok = new Token(jCas, pred+ts.getBegin(), i+ts.getBegin());
 					tok.addToIndexes();
 					pred = i+2;
