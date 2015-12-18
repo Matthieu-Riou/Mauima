@@ -73,7 +73,6 @@ public class CandidateReader extends JCasCollectionReader_ImplBase {
 			 while((line = readerFile.readLine()) != null){
 				 String[] splits = line.split("\t");
 				 
-				 System.out.println(candidate.getFullForms());
 				 if(candidate.getFullForms().containsKey(splits[0]))
 				 {
 					 return 1;
@@ -105,7 +104,7 @@ public class CandidateReader extends JCasCollectionReader_ImplBase {
 			candidate.setIdf(c.getInverse_document_frequency());
 			candidate.setFirst_occ(c.getFirst_occurrence());
 			candidate.setLast_occ(c.getLast_occurrence());
-			System.out.println(c.getName() + " : " + Integer.toString(computeClass(c, documentName)));
+
 			candidate.setClass_(computeClass(c, documentName));
 			
 			candidate.addToIndexes();
