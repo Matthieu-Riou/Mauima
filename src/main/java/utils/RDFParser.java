@@ -15,7 +15,7 @@ public class RDFParser {
     labels_ = new TreeMap<String, ArrayList<String>>();
   }
   
-  void parse(String filename) {
+  public void parse(String filename) {
     BufferedReader reader = null;
     try {
       reader = new BufferedReader(new FileReader(filename));
@@ -48,6 +48,12 @@ public class RDFParser {
             labels_.get(last).add(value);
         }
       }
+    } catch (IOException e) {
+      // TODO Auto-generated catch block
+      e.printStackTrace();
+    }
+    try {
+      reader.close();
     } catch (IOException e) {
       // TODO Auto-generated catch block
       e.printStackTrace();
