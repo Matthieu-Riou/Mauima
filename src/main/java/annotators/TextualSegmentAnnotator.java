@@ -29,10 +29,10 @@ public class TextualSegmentAnnotator extends JCasAnnotator_ImplBase {
 				continue;
 			}
 			if (text.charAt(i) == '.' && (text.charAt(i + 1) == ' ' || text.charAt(i + 1) == '\n' || text.charAt(i + 1) == '.')) {
-				TextualSegment seg = new TextualSegment(jCas, pred, i);
-				seg.addToIndexes();
-				pred = i+2;
-				skip = true;
+                TextualSegment seg = new TextualSegment(jCas, pred, i);
+                seg.addToIndexes();
+                pred = i + 2;
+                skip = true;
 			}
 			else if (text.charAt(i) == '\n' && caps.contains(text.charAt(i+1)) || text.charAt(i) == ':') {
 			  if (text.charAt(i-1) == ' ') {
