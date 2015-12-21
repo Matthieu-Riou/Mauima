@@ -13,7 +13,6 @@ public class Tokenizer extends JCasAnnotator_ImplBase {
 	public void process(JCas jCas) throws AnalysisEngineProcessException {
 		// TODO Auto-generated method stub
 		for (TextualSegment ts : select(jCas, TextualSegment.class)) {
-            System.out.println("ts.getCoveredText() = " + ts.getCoveredText());
             String text = ts.getCoveredText() + ' ';
             int pred = 0;
             Token tok;
@@ -24,7 +23,6 @@ public class Tokenizer extends JCasAnnotator_ImplBase {
                     case Character.SPACE_SEPARATOR:
                         if (text.substring(pred, i).length() != 0) {
                             tok = new Token(jCas, pred + ts.getBegin(), i + ts.getBegin());
-                            System.out.println("tok.getCoveredText() = " + tok.getCoveredText());
                             tok.addToIndexes();
                         }
                         pred = i + 1;
@@ -39,12 +37,10 @@ public class Tokenizer extends JCasAnnotator_ImplBase {
                     case Character.MODIFIER_LETTER:
                     case Character.OTHER_LETTER:
                     case Character.TITLECASE_LETTER:
-                        //System.out.println("letter");
                         break;
                     case Character.OTHER_PUNCTUATION:
                         if (text.substring(pred, i).length() != 0) {
                             tok = new Token(jCas, pred + ts.getBegin(), i + ts.getBegin());
-                            System.out.println("tok.getCoveredText() = " + tok.getCoveredText());
                             tok.addToIndexes();
                         }
                         pred = i + 1;
@@ -53,7 +49,6 @@ public class Tokenizer extends JCasAnnotator_ImplBase {
                     case Character.END_PUNCTUATION:
                         if (text.substring(pred, i).length() != 0) {
                             tok = new Token(jCas, pred + ts.getBegin(), i + ts.getBegin());
-                            System.out.println("tok.getCoveredText() = " + tok.getCoveredText());
                             tok.addToIndexes();
                         }
                         pred = i + 1;
@@ -62,34 +57,11 @@ public class Tokenizer extends JCasAnnotator_ImplBase {
                         if (text.charAt(i) == '\n') {
                             if (text.substring(pred, i).length() != 0) {
                                 tok = new Token(jCas, pred + ts.getBegin(), i + ts.getBegin());
-                                System.out.println("tok.getCoveredText() = " + tok.getCoveredText());
                                 tok.addToIndexes();
                             }
                             pred = i + 1;
                         }
-                        //System.out.println("other");
                 }
-                /*if (skip) {
-                    skip = false;
-					continue;
-				}
-				if (text.charAt(i) == ' ' || text.charAt(i) == '\''
-						 || text.charAt(i) == '-' || text.charAt(i) == '\n') {
-					Token tok = new Token(jCas, pred+ts.getBegin(), i+ts.getBegin());
-					tok.addToIndexes();
-					if (i+1 < text.length() && (text.charAt(i+1) == '(' || text.charAt(i+1) == ' ')) {
-						pred = i+2;
-						skip = true;
-					}
-					else
-						pred = i+1;
-				}
-				else if (text.charAt(i) == ',' || text.charAt(i) == ')'|| text.charAt(i) == ';') {
-					Token tok = new Token(jCas, pred+ts.getBegin(), i+ts.getBegin());
-					tok.addToIndexes();
-					pred = i+2;
-					skip = true;
-				}*/
 			}
 		}
 	}
