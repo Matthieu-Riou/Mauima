@@ -87,7 +87,7 @@ public class Candidate {
 	
 	public void addInformation(String fullForm, int pos) {
 	  if (full_forms_.containsKey(fullForm)) {
-	    full_forms_.replace(fullForm, full_forms_.get(fullForm)+1);
+		  full_forms_.put(fullForm, full_forms_.get(fullForm) + 1);
 	  }
 	  else {
 	    full_forms_.put(fullForm, 1);

@@ -1,12 +1,11 @@
 package annotators;
 
-import java.util.ArrayList;
-
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
 import org.apache.uima.fit.component.JCasAnnotator_ImplBase;
 import org.apache.uima.jcas.JCas;
-
 import types.TextualSegment;
+
+import java.util.ArrayList;
 
 public class TextualSegmentAnnotator extends JCasAnnotator_ImplBase {
 			
@@ -29,7 +28,7 @@ public class TextualSegmentAnnotator extends JCasAnnotator_ImplBase {
 				skip = false;
 				continue;
 			}
-			if (text.charAt(i) == '.' && (text.charAt(i+1) == ' ' || text.charAt(i+1) == '\n')) {
+			if (text.charAt(i) == '.' && (text.charAt(i + 1) == ' ' || text.charAt(i + 1) == '\n' || text.charAt(i + 1) == '.')) {
 				TextualSegment seg = new TextualSegment(jCas, pred, i);
 				seg.addToIndexes();
 				pred = i+2;

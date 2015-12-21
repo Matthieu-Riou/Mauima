@@ -1,21 +1,20 @@
 package annotators;
 
-import static org.apache.uima.fit.util.JCasUtil.select;
-
+import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
 import org.apache.uima.fit.component.JCasAnnotator_ImplBase;
 import org.apache.uima.jcas.JCas;
-
 import types.TextualSegment;
-import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
+
+import static org.apache.uima.fit.util.JCasUtil.select;
 
 public class Tokenizer extends JCasAnnotator_ImplBase {
 	@Override
 	public void process(JCas jCas) throws AnalysisEngineProcessException {
 		// TODO Auto-generated method stub
 		for (TextualSegment ts : select(jCas, TextualSegment.class)) {
-			String text = ts.getCoveredText() + ' ';
-			int pred = 0;
+            String text = ts.getCoveredText() + ' ';
+            int pred = 0;
 			boolean skip = false;
 			for (int i = 0; i < text.length(); i++) {
 				if (skip) {
