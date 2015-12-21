@@ -6,7 +6,6 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.TreeMap;
-import java.util.regex.Pattern;
 
 public class RDFParser {
   public TreeMap<String, ArrayList<String>> labels_;
@@ -25,7 +24,6 @@ public class RDFParser {
     }
       
     try {
-      Pattern p = Pattern.compile(">(.+)<");
       String line;
       String last = "";
       while ((line = reader.readLine()) != null) {
