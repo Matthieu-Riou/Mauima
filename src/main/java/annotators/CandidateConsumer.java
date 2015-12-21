@@ -1,10 +1,6 @@
 package annotators;
 
-import static org.apache.uima.fit.util.JCasUtil.select;
-
-import java.util.ArrayList;
-import java.util.TreeMap;
-
+import de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData;
 import org.apache.uima.UimaContext;
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
 import org.apache.uima.fit.component.JCasAnnotator_ImplBase;
@@ -12,19 +8,19 @@ import org.apache.uima.fit.descriptor.ConfigurationParameter;
 import org.apache.uima.fit.descriptor.ExternalResource;
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.resource.ResourceInitializationException;
-
 import resources.Candidate;
 import resources.CandidateList;
-import de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData;
+
+import java.util.ArrayList;
+import java.util.TreeMap;
+
+import static org.apache.uima.fit.util.JCasUtil.select;
 
 public class CandidateConsumer extends JCasAnnotator_ImplBase {
   public final static String CANDIDATE_KEY = "candidateKey";
-
-  @ExternalResource(key = CANDIDATE_KEY)
-  private CandidateList collection;
-
   public static final String PARAM_FILENAME = "filename_";
-
+    @ExternalResource(key = CANDIDATE_KEY)
+    private CandidateList collection;
   @ConfigurationParameter(name = PARAM_FILENAME, mandatory = true, defaultValue = "target/candidates.txt")
   private String filename_;
   
@@ -56,7 +52,7 @@ public class CandidateConsumer extends JCasAnnotator_ImplBase {
   @Override
   public void process(JCas jcas) throws AnalysisEngineProcessException {
     for (DocumentMetaData dmd : select(jcas, DocumentMetaData.class)) {
-      files_.add(dmd.getDocumentTitle());
+        files_.add(dmd.getDocumentUri().substring(dmd.getDocumentUri().lastIndexOf("/") + 1, dmd.getDocumentUri().length()));
     }
   }
 

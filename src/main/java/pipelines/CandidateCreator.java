@@ -20,7 +20,7 @@ public class CandidateCreator {
 
     runPipeline(
             createReaderDescription(TextReader.class, TextReader.PARAM_SOURCE_LOCATION,
-                    "src/main/resources/resources/term_assignment/train/*.txt", TextReader.PARAM_LANGUAGE, "fr"),
+                    "src/main/resources/train/*.txt", TextReader.PARAM_LANGUAGE, "fr"),
             createEngineDescription(TextualSegmentAnnotator.class),
             createEngineDescription(Tokenizer.class),
             createEngineDescription(NGramAnnotator.class, NGramAnnotator.PARAM_MIN_NGRAM_LENGTH, 3,
