@@ -9,6 +9,7 @@ import org.apache.uima.resource.ResourceInitializationException;
 import types.Candidate;
 import types.Document;
 import types.Features;
+import utils.Pair;
 import weka.classifiers.Classifier;
 import weka.core.Attribute;
 import weka.core.FastVector;
@@ -21,16 +22,14 @@ import static org.apache.uima.fit.util.JCasUtil.select;
 import static org.apache.uima.fit.util.JCasUtil.selectCovered;
 
 
-
 public class WekaClassifier extends JCasAnnotator_ImplBase {
 
     public static final String PARAM_MODEL = "MODEL";
     public static final String PARAM_TOP_K = "TOP_K";
     public static final String PARAM_THRESHOLD = "THRESHOLD";
-
-    Classifier classifier;
-    Instances classifierData;
     int i = 0;
+    private Classifier classifier;
+    private Instances classifierData;
     @ConfigurationParameter(name = PARAM_MODEL,
             description = "classifier model",
             mandatory = true)
@@ -41,7 +40,7 @@ public class WekaClassifier extends JCasAnnotator_ImplBase {
             mandatory = true)
     private int top_k_;
 
-    private Map<String, Double> bests_;
+    private Map<Pair<String, Integer>, Double> bests_;
 
     @ConfigurationParameter(name = PARAM_THRESHOLD,
             description = "Threshold to choose K best probabilities",
@@ -86,7 +85,7 @@ public class WekaClassifier extends JCasAnnotator_ImplBase {
 
         classifierData = new Instances("ClassifierData", attributes, 0);
         classifierData.setClassIndex(numFeatures);
-        bests_ = new TreeMap<String, Double>();
+        bests_ = new TreeMap<Pair<String, Integer>, Double>();
     }
 
     private <K, V extends Comparable<? super V>> Map<K, V> take_n(Map<K, V> map) {
@@ -94,7 +93,7 @@ public class WekaClassifier extends JCasAnnotator_ImplBase {
 
         Map<K, V> result = new LinkedHashMap<K, V>();
         int k = 0;
-        while (k < top_k_) {
+        while (k < top_k_ && list.size() > 0) {
             K n = list.remove(list.size() - 1);
             result.put(n, map.get(n));
             k++;
@@ -128,7 +127,7 @@ public class WekaClassifier extends JCasAnnotator_ImplBase {
         // features
         // represented by a class Features
 
-        TreeMap<String, double[]> candidates_relevantness_probabilities = new TreeMap<String, double[]>();
+        Map<Pair<String, Integer>, double[]> candidates_relevantness_probabilities = new TreeMap<Pair<String, Integer>, double[]>();
 
         // Feeding instances data to weka model to get class probabilities
         for (Features candidate : select(jCas, Features.class)) {
@@ -144,25 +143,41 @@ public class WekaClassifier extends JCasAnnotator_ImplBase {
 
 
             try {
-                candidates_relevantness_probabilities.put(covered.iterator().next().getEffective_full_form(), classifier
-                        .distributionForInstance(current_instance));
+                Candidate tmp_c = covered.iterator().next();
+                candidates_relevantness_probabilities.put(Pair.of(tmp_c.getEffective_full_form(), tmp_c.getClass_()),
+                        classifier.distributionForInstance(current_instance));
             } catch (Exception e) {
                 // TODO Auto-generated catch block
                 e.printStackTrace();
             }
 
         }
+        double retAsGoodReallyGood = 0;
+        double retAsGoodReallyNotGood = 0;
+        double retAsNotGoodReallyGood = 0;
 
-        for (String c : candidates_relevantness_probabilities.keySet()) {
+        for (Pair<String, Integer> c : candidates_relevantness_probabilities.keySet()) {
             if (candidates_relevantness_probabilities.get(c)[1] >= threshold_) {
+                if (c.getSecond() == 1)
+                    retAsGoodReallyGood++;
+                else
+                    retAsGoodReallyNotGood++;
                 bests_.put(c, candidates_relevantness_probabilities.get(c)[1]);
+            } else {
+                if (c.getSecond() == 1)
+                    retAsNotGoodReallyGood++;
             }
         }
 
         bests_ = take_n(sortByValue(bests_));
+        //System.out.println("bests_ = " + bests_.keySet());
 
-        for (String s : bests_.keySet()) {
-            System.out.println(s + " : " + bests_.get(s));
+        for (Pair<String, Integer> s : bests_.keySet()) {
+            System.out.println(s.getFirst() + " : " + bests_.get(s));
         }
+        System.out.println("\n##########################################");
+        System.out.println("Precision = " + retAsGoodReallyGood / (retAsGoodReallyGood + retAsGoodReallyNotGood) * 100 + "%");
+        System.out.println("Recall = " + retAsGoodReallyGood / (retAsGoodReallyGood + retAsNotGoodReallyGood) * 100 + "%");
+        System.out.println("############################################");
     }
 }
