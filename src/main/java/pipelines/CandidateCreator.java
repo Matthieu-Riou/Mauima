@@ -20,11 +20,11 @@ public class CandidateCreator {
 
     runPipeline(
             createReaderDescription(TextReader.class, TextReader.PARAM_SOURCE_LOCATION,
-                    "src/main/resources/train/*.txt", TextReader.PARAM_LANGUAGE, "fr"),
+                    "src/main/resources/resources/term_assignment/train/w72*.txt", TextReader.PARAM_LANGUAGE, "en"),
             createEngineDescription(TextualSegmentAnnotator.class),
             createEngineDescription(Tokenizer.class),
-            createEngineDescription(NGramAnnotator.class, NGramAnnotator.PARAM_MIN_NGRAM_LENGTH, 3,
-                    NGramAnnotator.PARAM_MAX_NGRAM_LENGTH, 3),
+            createEngineDescription(NGramAnnotator.class, NGramAnnotator.PARAM_MIN_NGRAM_LENGTH, 1,
+                    NGramAnnotator.PARAM_MAX_NGRAM_LENGTH, 1),
             createEngineDescription(CandidateAnnotator.class, CandidateAnnotator.CANDIDATE_KEY,
                     candidatesResourceDesc),
             createEngineDescription(CandidateConsumer.class, CandidateConsumer.CANDIDATE_KEY,

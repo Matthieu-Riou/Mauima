@@ -3,11 +3,10 @@ package annotators;
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
 import org.apache.uima.fit.component.JCasAnnotator_ImplBase;
 import org.apache.uima.jcas.JCas;
-
-import static org.apache.uima.fit.util.JCasUtil.select;
-
 import types.Candidate;
 import types.Features;
+
+import static org.apache.uima.fit.util.JCasUtil.select;
 
 public class FeaturesAnnotator extends JCasAnnotator_ImplBase {
 
@@ -25,9 +24,10 @@ public class FeaturesAnnotator extends JCasAnnotator_ImplBase {
 	    features.setFirst_occurrence(c.getFirst_occ()); // 4
 	    features.setLast_occurrence(c.getLast_occ()); // 5
 	    features.setSpread(features.getLast_occurrence() - features.getFirst_occurrence()); // 6
-	    
-	    features.addToIndexes();
-	    //System.out.println(c.getName() + " - Tf-idf : " + tfidf);
+		  features.setClass_(c.getClass_());
+
+		  features.addToIndexes();
+		  //System.out.println(c.getName() + " - Tf-idf : " + tfidf);
 	  }
 
   }

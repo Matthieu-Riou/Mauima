@@ -1,10 +1,5 @@
 package readers;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
-import java.util.List;
-
 import org.apache.uima.UimaContext;
 import org.apache.uima.collection.CollectionException;
 import org.apache.uima.fit.component.JCasCollectionReader_ImplBase;
@@ -14,10 +9,14 @@ import org.apache.uima.jcas.JCas;
 import org.apache.uima.resource.ResourceInitializationException;
 import org.apache.uima.util.Progress;
 import org.apache.uima.util.ProgressImpl;
-
 import resources.AnnotatedCollection;
 import resources.Candidate;
 import types.Document;
+
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.List;
 
 
 public class CandidateReader extends JCasCollectionReader_ImplBase {
@@ -31,24 +30,21 @@ public class CandidateReader extends JCasCollectionReader_ImplBase {
 	*/
 	
 	public static final String CANDIDATE_KEY = "candidateKey";
+	public static final String PARAM_LANGUAGE = "LANGUAGE";
+	public static final String PARAM_DIRECTORY = "key_directory";
+	int i = 0;
+	int size = 0;
 	 @ExternalResource(key = CANDIDATE_KEY)
 	 private AnnotatedCollection collection;
-	 
-	 public static final String PARAM_LANGUAGE = "LANGUAGE";
 		@ConfigurationParameter(name = PARAM_LANGUAGE,
 				description = "default language for the text",
 				mandatory = false, defaultValue = "en")
 		private String language;
-	
-	public static final String PARAM_DIRECTORY = "key_directory";
 	@ConfigurationParameter(
 	name = PARAM_DIRECTORY,
 	description = "The directory containing the key files",
 	mandatory = true)
 	private String directory_dir;
-	
-	int i = 0;
-	int size = 0;
 
 	@Override
 	public void initialize(UimaContext context)
@@ -73,8 +69,9 @@ public class CandidateReader extends JCasCollectionReader_ImplBase {
 			String line;
 			 while((line = readerFile.readLine()) != null){
 				 String[] splits = line.split("\t");
-				 
-				 if(candidate.getFullForms().containsKey(splits[0]))
+				 System.out.println("candidate.getFullForms() = " + candidate.getFullForms());
+				 System.out.println("splits[0] = " + splits[0]);
+				 if (candidate.getFullForms().containsKey(splits[0].toLowerCase()))
 				 {
 					 return 1;
 				 }

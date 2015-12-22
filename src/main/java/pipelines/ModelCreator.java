@@ -1,20 +1,19 @@
 package pipelines;
 
+import annotators.FeaturesAnnotator;
+import annotators.WekaModelBuilder;
+import org.apache.uima.analysis_engine.AnalysisEngine;
+import org.apache.uima.analysis_engine.AnalysisEngineDescription;
+import org.apache.uima.collection.CollectionReader;
+import org.apache.uima.resource.ExternalResourceDescription;
+import readers.CandidateReader;
+import resources.AnnotatedCollection_Impl;
+
 import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngine;
 import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngineDescription;
 import static org.apache.uima.fit.factory.CollectionReaderFactory.createReader;
 import static org.apache.uima.fit.factory.ExternalResourceFactory.createExternalResourceDescription;
 import static org.apache.uima.fit.pipeline.SimplePipeline.runPipeline;
-
-import org.apache.uima.analysis_engine.AnalysisEngine;
-import org.apache.uima.analysis_engine.AnalysisEngineDescription;
-import org.apache.uima.collection.CollectionReader;
-import org.apache.uima.resource.ExternalResourceDescription;
-
-import readers.CandidateReader;
-import resources.AnnotatedCollection_Impl;
-import annotators.FeaturesAnnotator;
-import annotators.WekaModelBuilder;
 
 public class ModelCreator {
 	
@@ -28,7 +27,7 @@ public class ModelCreator {
 				CandidateReader.CANDIDATE_KEY,
 		        candidatesResourceDesc,
 		        CandidateReader.PARAM_DIRECTORY,
-		        "src/main/resources/train/keys/"
+				"src/main/resources/resources/term_assignment/train/"
 				);
 		
 		AnalysisEngineDescription ae_Features = createEngineDescription(FeaturesAnnotator.class);
