@@ -27,7 +27,7 @@ public class ModelCreator {
 				CandidateReader.CANDIDATE_KEY,
 		        candidatesResourceDesc,
 		        CandidateReader.PARAM_DIRECTORY,
-				"src/main/resources/resources/term_assignment/train/"
+				"src/main/resources/train/keys/"
 				);
 		
 		AnalysisEngineDescription ae_Features = createEngineDescription(FeaturesAnnotator.class);

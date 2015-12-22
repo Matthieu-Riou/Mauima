@@ -24,11 +24,10 @@ public class FeaturesAnnotator extends JCasAnnotator_ImplBase {
 	    features.setFirst_occurrence(c.getFirst_occ()); // 4
 	    features.setLast_occurrence(c.getLast_occ()); // 5
 	    features.setSpread(features.getLast_occurrence() - features.getFirst_occurrence()); // 6
-		  features.setClass_(c.getClass_());
+          features.setClass_(c.getClass_());
 
-		  features.addToIndexes();
-		  //System.out.println(c.getName() + " - Tf-idf : " + tfidf);
-	  }
+          features.addToIndexes();
+      }
 
   }
   

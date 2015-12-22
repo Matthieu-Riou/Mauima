@@ -5,16 +5,12 @@ import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
 import org.apache.uima.fit.component.JCasAnnotator_ImplBase;
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.resource.ResourceInitializationException;
-
-import static org.apache.uima.fit.util.JCasUtil.select;
 import types.Features;
 import weka.classifiers.Classifier;
 import weka.classifiers.meta.Bagging;
-import weka.core.Attribute;
-import weka.core.FastVector;
-import weka.core.Instance;
-import weka.core.Instances;
-import weka.core.Utils;
+import weka.core.*;
+
+import static org.apache.uima.fit.util.JCasUtil.select;
 
 public class WekaModelBuilder extends JCasAnnotator_ImplBase {
 	
@@ -74,7 +70,7 @@ public class WekaModelBuilder extends JCasAnnotator_ImplBase {
 	    System.out.println("Collection Process Complete --> build model...");
 	    
 	    try {
-			classifier.setOptions(Utils.splitOptions("-P 100 -S 1 -I 10 -W weka.classifiers.trees.M5P -- -U -M 7.0"));
+			classifier.setOptions(Utils.splitOptions("-P 10 -S 1 -I 10 -W weka.classifiers.trees.J48 -- -U -M 2"));
 		} catch (Exception e) {
 			//TODO
 			System.out.println("Error while loading classifier options");

@@ -1,44 +1,38 @@
 package annotators;
 
-import static org.apache.uima.fit.util.JCasUtil.select;
-import static org.apache.uima.fit.util.JCasUtil.selectCovered;
-
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.TreeMap;
-
 import org.apache.uima.UimaContext;
-import org.apache.uima.fit.component.JCasAnnotator_ImplBase;
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
+import org.apache.uima.fit.component.JCasAnnotator_ImplBase;
 import org.apache.uima.fit.descriptor.ConfigurationParameter;
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.resource.ResourceInitializationException;
-
 import types.Candidate;
 import types.Document;
 import types.Features;
 import weka.classifiers.Classifier;
-import weka.classifiers.meta.Bagging;
 import weka.core.Attribute;
 import weka.core.FastVector;
 import weka.core.Instance;
 import weka.core.Instances;
-import utils.ProbaList;
+
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.TreeMap;
+
+import static org.apache.uima.fit.util.JCasUtil.select;
+import static org.apache.uima.fit.util.JCasUtil.selectCovered;
 
 
 public class WekaClassifier extends JCasAnnotator_ImplBase {
   
   public static final String PARAM_MODEL = "MODEL";
+    Classifier classifier;
+    Instances classifierData;
+    int i = 0;
   @ConfigurationParameter(name = PARAM_MODEL,
   description = "classifier model",
   mandatory = true)
   private String param_model_;
-  
-  Classifier classifier;
-  Instances classifierData;
-  
-  int i = 0;
 
   private ArrayList<Integer> sortCandidatesByProbabality(
           ArrayList<double[]> candidates_relevantness_probabilities) {
@@ -76,9 +70,9 @@ public class WekaClassifier extends JCasAnnotator_ImplBase {
 	    attributes.addElement(new Attribute("LastOccurrence")); // 5
 	    attributes.addElement(new Attribute("Spread")); // 6
 	    // declare a class attribute :
-	    boolean nominalClassValue = false;
-	    if (nominalClassValue) {
-	      FastVector vals = new FastVector(2);
+      boolean nominalClassValue = true;
+      if (nominalClassValue) {
+          FastVector vals = new FastVector(2);
 	      vals.addElement("False");
 	      vals.addElement("True");
 	      attributes.addElement(new Attribute("Keyphrase?", vals));
@@ -128,7 +122,8 @@ public class WekaClassifier extends JCasAnnotator_ImplBase {
     
     for(String c : candidates_relevantness_probabilities.keySet())
     {
-    	System.out.println(c + " : " + Arrays.toString(candidates_relevantness_probabilities.get(c)));
+        if (candidates_relevantness_probabilities.get(c)[0] < candidates_relevantness_probabilities.get(c)[1])
+            System.out.println(c + " : " + candidates_relevantness_probabilities.get(c)[1]);
     }
 
     

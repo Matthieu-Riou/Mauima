@@ -69,8 +69,6 @@ public class CandidateReader extends JCasCollectionReader_ImplBase {
 			String line;
 			 while((line = readerFile.readLine()) != null){
 				 String[] splits = line.split("\t");
-				 System.out.println("candidate.getFullForms() = " + candidate.getFullForms());
-				 System.out.println("splits[0] = " + splits[0]);
 				 if (candidate.getFullForms().containsKey(splits[0].toLowerCase()))
 				 {
 					 return 1;
