@@ -53,6 +53,15 @@ public class Tokenizer extends JCasAnnotator_ImplBase {
                         }
                         pred = i + 1;
                         break;
+                    case Character.CONNECTOR_PUNCTUATION:
+                    case Character.DASH_PUNCTUATION:
+                    case Character.MATH_SYMBOL:
+                        if (text.substring(pred, i).length() != 0) {
+                            tok = new Token(jCas, pred + ts.getBegin(), i + ts.getBegin());
+                            tok.addToIndexes();
+                        }
+                        pred = i + 1;
+                        break;
                     default:
                         if (text.charAt(i) == '\n') {
                             if (text.substring(pred, i).length() != 0) {
