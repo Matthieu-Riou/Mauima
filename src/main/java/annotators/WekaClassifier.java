@@ -15,10 +15,7 @@ import weka.core.FastVector;
 import weka.core.Instance;
 import weka.core.Instances;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.TreeMap;
+import java.util.*;
 
 import static org.apache.uima.fit.util.JCasUtil.select;
 import static org.apache.uima.fit.util.JCasUtil.selectCovered;
@@ -44,23 +41,13 @@ public class WekaClassifier extends JCasAnnotator_ImplBase {
             mandatory = true)
     private int top_k_;
 
-    private ArrayList<Double> bests_;
+    private Map<String, Double> bests_;
 
     @ConfigurationParameter(name = PARAM_THRESHOLD,
             description = "Threshold to choose K best probabilities",
-            mandatory = true)
-    private int threshold_;
-
-    private ArrayList<Integer> sortCandidatesByProbabality(
-            ArrayList<double[]> candidates_relevantness_probabilities) {
-        int relevant_class_index = 0;
-        ArrayList<Integer> candidates_indexes_list = new ArrayList<Integer>();
-        for (double[] relevantness_proba : candidates_relevantness_probabilities) {
-
-        }
-
-        return candidates_indexes_list;
-    }
+            mandatory = true,
+            defaultValue = "0.0")
+    private double threshold_;
 
     @Override
     public void initialize(UimaContext context)
@@ -99,7 +86,35 @@ public class WekaClassifier extends JCasAnnotator_ImplBase {
 
         classifierData = new Instances("ClassifierData", attributes, 0);
         classifierData.setClassIndex(numFeatures);
-        bests_ = new ArrayList<Double>();
+        bests_ = new TreeMap<String, Double>();
+    }
+
+    private <K, V extends Comparable<? super V>> Map<K, V> take_n(Map<K, V> map) {
+        ArrayList<K> list = new ArrayList<K>(map.keySet());
+
+        Map<K, V> result = new LinkedHashMap<K, V>();
+        int k = 0;
+        while (k < top_k_) {
+            K n = list.remove(list.size() - 1);
+            result.put(n, map.get(n));
+            k++;
+        }
+        return result;
+    }
+
+    private <K, V extends Comparable<? super V>> Map<K, V> sortByValue(Map<K, V> map) {
+        List<Map.Entry<K, V>> list = new LinkedList<Map.Entry<K, V>>(map.entrySet());
+        Collections.sort(list, new Comparator<Map.Entry<K, V>>() {
+            public int compare(Map.Entry<K, V> o1, Map.Entry<K, V> o2) {
+                return (o1.getValue()).compareTo(o2.getValue());
+            }
+        });
+
+        Map<K, V> result = new LinkedHashMap<K, V>();
+        for (Map.Entry<K, V> entry : list) {
+            result.put(entry.getKey(), entry.getValue());
+        }
+        return result;
     }
 
     @Override
@@ -140,17 +155,14 @@ public class WekaClassifier extends JCasAnnotator_ImplBase {
 
         for (String c : candidates_relevantness_probabilities.keySet()) {
             if (candidates_relevantness_probabilities.get(c)[1] >= threshold_) {
-                bests_.add(candidates_relevantness_probabilities.get(c)[1]);
-                System.out.println(c + " : " + candidates_relevantness_probabilities.get(c)[1]);
+                bests_.put(c, candidates_relevantness_probabilities.get(c)[1]);
             }
         }
 
-        Collections.sort(bests_);
-        bests_.subList(bests_.size() - 1 - top_k_, bests_.size());
+        bests_ = take_n(sortByValue(bests_));
 
-
-        //ArrayList<Integer> best_candidates_indexes = sortCandidatesByProbabality(candidates_relevantness_probabilities);
-        // TODO sort candidates_relevantness_probabilities using class ProbaList
-
+        for (String s : bests_.keySet()) {
+            System.out.println(s + " : " + bests_.get(s));
+        }
     }
 }

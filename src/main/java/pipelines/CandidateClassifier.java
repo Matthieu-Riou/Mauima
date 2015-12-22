@@ -1,20 +1,19 @@
 package pipelines;
 
+import annotators.FeaturesAnnotator;
+import annotators.WekaClassifier;
+import org.apache.uima.analysis_engine.AnalysisEngine;
+import org.apache.uima.analysis_engine.AnalysisEngineDescription;
+import org.apache.uima.collection.CollectionReader;
+import org.apache.uima.resource.ExternalResourceDescription;
+import readers.CandidateReader;
+import resources.AnnotatedCollection_Impl;
+
 import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngine;
 import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngineDescription;
 import static org.apache.uima.fit.factory.CollectionReaderFactory.createReader;
 import static org.apache.uima.fit.factory.ExternalResourceFactory.createExternalResourceDescription;
 import static org.apache.uima.fit.pipeline.SimplePipeline.runPipeline;
-
-import org.apache.uima.analysis_engine.AnalysisEngine;
-import org.apache.uima.analysis_engine.AnalysisEngineDescription;
-import org.apache.uima.collection.CollectionReader;
-import org.apache.uima.resource.ExternalResourceDescription;
-
-import readers.CandidateReader;
-import resources.AnnotatedCollection_Impl;
-import annotators.FeaturesAnnotator;
-import annotators.WekaClassifier;
 
 public class CandidateClassifier {
 
@@ -28,16 +27,18 @@ public class CandidateClassifier {
 				CandidateReader.CANDIDATE_KEY,
 		        candidatesResourceDesc,
 		        CandidateReader.PARAM_DIRECTORY,
-		        "src/main/resources/train/keys/"
-				);
+                "src/main/resources/resources/automatic_tagging/train/"
+        );
 		
 		AnalysisEngineDescription ae_Features = createEngineDescription(FeaturesAnnotator.class);
 		
 		AnalysisEngineDescription ae_Model = createEngineDescription(WekaClassifier.class,
 				WekaClassifier.PARAM_MODEL,
-				"target/m5p.model");
-		
-		AnalysisEngineDescription aed = createEngineDescription(ae_Features, ae_Model);
+                "target/m5p.model",
+                WekaClassifier.PARAM_TOP_K,
+                10);
+
+      AnalysisEngineDescription aed = createEngineDescription(ae_Features, ae_Model);
 		
 		AnalysisEngine ae = createEngine(aed);
 		

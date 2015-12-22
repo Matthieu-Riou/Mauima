@@ -27,7 +27,7 @@ public class ModelCreator {
 				CandidateReader.CANDIDATE_KEY,
 		        candidatesResourceDesc,
 		        CandidateReader.PARAM_DIRECTORY,
-				"src/main/resources/train/keys/"
+				"src/main/resources/resources/automatic_tagging/train/"
 				);
 		
 		AnalysisEngineDescription ae_Features = createEngineDescription(FeaturesAnnotator.class);
