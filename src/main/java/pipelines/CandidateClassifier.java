@@ -36,7 +36,9 @@ public class CandidateClassifier {
 				WekaClassifier.PARAM_MODEL,
                 "target/m5p.model",
                 WekaClassifier.PARAM_TOP_K,
-                10);
+				10,
+				WekaClassifier.PARAM_THRESHOLD,
+				0.3f);
 
       AnalysisEngineDescription aed = createEngineDescription(ae_Features, ae_Model);
 		

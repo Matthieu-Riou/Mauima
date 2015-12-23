@@ -77,7 +77,7 @@ public class WekaClassifier extends JCasAnnotator_ImplBase {
             description = "Threshold to choose K best probabilities",
             mandatory = true,
             defaultValue = "0.0")
-    private double threshold_;
+    private float threshold_;
 
     /**
      * A map to store the K bests candidates
@@ -237,8 +237,8 @@ public class WekaClassifier extends JCasAnnotator_ImplBase {
             System.out.println(s.getFirst() + " : " + bests_.get(s));
         }
         System.out.println("\n##########################################");
-        System.out.println("Precision = " + retAsGoodReallyGood / (retAsGoodReallyGood + retAsGoodReallyNotGood) * 100 + "%");
-        System.out.println("Recall = " + retAsGoodReallyGood / (retAsGoodReallyGood + retAsNotGoodReallyGood) * 100 + "%");
+        System.out.println("Precision = " + ((retAsGoodReallyGood + retAsGoodReallyNotGood) == 0 ? 0.0 : retAsGoodReallyGood / (retAsGoodReallyGood + retAsGoodReallyNotGood) * 100) + "%");
+        System.out.println("Recall = " + ((retAsGoodReallyGood + retAsNotGoodReallyGood) == 0 ? 0.0 : retAsGoodReallyGood / (retAsGoodReallyGood + retAsNotGoodReallyGood) * 100) + "%");
         System.out.println("############################################");
     }
 }
