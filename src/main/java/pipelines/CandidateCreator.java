@@ -19,7 +19,7 @@ public class CandidateCreator {
 
     public static void main(String[] args) throws Exception {
         CandidateCreator cc = new CandidateCreator();
-        cc.launch("src/main/resources/resources/term_assignment/train/*.txt", "en", 1, 3, false, "src/main/resources/resources/agrovoc_sample.rdf");
+        cc.launch("src/main/resources/resources/term_assignment/train/*.txt", "en", "target/candidates.txt", 1, 3, false, "src/main/resources/resources/agrovoc_sample.rdf");
     }
 
     /**
@@ -31,7 +31,7 @@ public class CandidateCreator {
      * @param max_ngram     The maximim size of the n-gram
      * @throws Exception
      */
-    public void launch(String path_to_txt, String lang, int min_ngram, int max_ngram) throws Exception {
+    public void launch(String path_to_txt, String lang, String output_filename, int min_ngram, int max_ngram) throws Exception {
         ExternalResourceDescription candidatesResourceDesc = createExternalResourceDescription(
                 CandidateList_Impl.class, new File("candidates.bin"));
 
@@ -45,7 +45,9 @@ public class CandidateCreator {
                 createEngineDescription(CandidateAnnotator.class, CandidateAnnotator.CANDIDATE_KEY,
                         candidatesResourceDesc),
                 createEngineDescription(CandidateConsumer.class, CandidateConsumer.CANDIDATE_KEY,
-                        candidatesResourceDesc));
+                        candidatesResourceDesc,
+                        CandidateConsumer.PARAM_FILENAME,
+                        output_filename));
     }
 
     /**
@@ -59,7 +61,7 @@ public class CandidateCreator {
      * @param path_to_vocab The path to the rdf file containing the vocabulary
      * @throws Exception
      */
-    public void launch(String path_to_txt, String lang, int min_ngram, int max_ngram, boolean use_vocab, String path_to_vocab) throws Exception {
+    public void launch(String path_to_txt, String lang, String output_filename, int min_ngram, int max_ngram, boolean use_vocab, String path_to_vocab) throws Exception {
         ExternalResourceDescription candidatesResourceDesc = createExternalResourceDescription(
                 CandidateList_Impl.class, new File("candidates.bin"));
 
@@ -73,6 +75,8 @@ public class CandidateCreator {
                 createEngineDescription(CandidateWithVocabAnnotator.class, CandidateWithVocabAnnotator.CANDIDATE_KEY,
                         candidatesResourceDesc, CandidateWithVocabAnnotator.PARAM_RDF_FILENAME, path_to_vocab),
                 createEngineDescription(CandidateConsumer.class, CandidateConsumer.CANDIDATE_KEY,
-                        candidatesResourceDesc));
+                        candidatesResourceDesc,
+                        CandidateConsumer.PARAM_FILENAME,
+                        output_filename));
     }
 }
