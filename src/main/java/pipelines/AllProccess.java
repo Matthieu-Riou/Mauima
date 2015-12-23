@@ -21,13 +21,8 @@ public class AllProccess {
 
         boolean use_vocab = false;
 
-        if (use_vocab) {
-            CandidateWithVocabCreator cwvc = new CandidateWithVocabCreator();
-            cwvc.launch(path_to_txt, lang, min_ngram, max_ngram, path_to_vocab);
-        } else {
-            CandidateCreator cc = new CandidateCreator();
-            cc.launch(path_to_txt, lang, min_ngram, max_ngram);
-        }
+        CandidateCreator ccr = new CandidateCreator();
+        ccr.launch(path_to_txt, lang, min_ngram, max_ngram, use_vocab, path_to_vocab);
 
         ModelCreator mc = new ModelCreator();
         mc.launch(path_to_candidates_resource, path_to_key_file);

@@ -12,6 +12,9 @@ import static org.apache.uima.fit.factory.CollectionReaderFactory.createReaderDe
 import static org.apache.uima.fit.factory.ExternalResourceFactory.createExternalResourceDescription;
 import static org.apache.uima.fit.pipeline.SimplePipeline.runPipeline;
 
+/**
+ * Pipeline to generate candidates using a vocabulary
+ */
 public class CandidateWithVocabCreator {
 
     public static void main(String[] args) throws Exception {
@@ -19,6 +22,16 @@ public class CandidateWithVocabCreator {
         cwvc.launch("src/main/resources/resources/term_assignment/train/*.txt", "en", 1, 3, "src/main/resources/resources/agrovoc_sample.rdf");
     }
 
+    /**
+     * Launch the pipeline to generate candidates using a vocabulary
+     *
+     * @param path_to_txt   The path to the directory containing all .txt files
+     * @param lang          The language of all .txt files
+     * @param min_ngram     The minimum size of the n-gram
+     * @param max_ngram     The maximim size of the n-gram
+     * @param path_to_vocab The path to the rdf file containing the vocabulary
+     * @throws Exception
+     */
     public void launch(String path_to_txt, String lang, int min_ngram, int max_ngram, String path_to_vocab) throws Exception {
         ExternalResourceDescription candidatesResourceDesc = createExternalResourceDescription(
                 CandidateList_Impl.class, new File("candidates.bin"));

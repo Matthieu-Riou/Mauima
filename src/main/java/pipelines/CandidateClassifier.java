@@ -15,6 +15,9 @@ import static org.apache.uima.fit.factory.CollectionReaderFactory.createReader;
 import static org.apache.uima.fit.factory.ExternalResourceFactory.createExternalResourceDescription;
 import static org.apache.uima.fit.pipeline.SimplePipeline.runPipeline;
 
+/**
+ * Pipeline to classify candidates
+ */
 public class CandidateClassifier {
 
     public static void main(String[] args) throws Exception {
@@ -23,6 +26,17 @@ public class CandidateClassifier {
                 "target/m5p.model", 10, 0.3f);
     }
 
+    /**
+     * Launch the pipeline to classify candidates
+     *
+     * @param path_to_candidates_resource The path to the generated file containing the candidates
+     * @param path_to_key_file            The path to the directory containing all .key files corresponding
+     *                                    to the .txt files
+     * @param path_to_model               The path to the file containing the serialized Weka model
+     * @param top_k                       The number of best candidates to keep
+     * @param threshold                   The threshold to choose good candidates
+     * @throws Exception
+     */
     public void launch(String path_to_candidates_resource, String path_to_key_file, String path_to_model, int top_k, float threshold) throws Exception {
         ExternalResourceDescription candidatesResourceDesc = createExternalResourceDescription(AnnotatedCollection_Impl.class,
                 path_to_candidates_resource);
