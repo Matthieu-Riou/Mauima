@@ -23,7 +23,7 @@ public class AllProccess {
         int max_ngram = 3;
         int top_k = 10;
 
-        float threshold = 0.3f; // must be a float !!!
+        float threshold = 0.0f; // must be a float !!!
 
         boolean use_vocab = false;
 
