@@ -17,34 +17,40 @@ import static org.apache.uima.fit.pipeline.SimplePipeline.runPipeline;
 
 public class CandidateClassifier {
 
-  public static void main(String[] args) throws Exception {
-	  ExternalResourceDescription candidatesResourceDesc = createExternalResourceDescription(AnnotatedCollection_Impl.class,
-				 "file:target/candidates.txt");
+    public static void main(String[] args) throws Exception {
+        CandidateClassifier cc = new CandidateClassifier();
+        cc.launch("file:target/candidates.txt", "src/main/resources/resources/automatic_tagging/train/",
+                "target/m5p.model", 10, 0.3f);
+    }
+
+    public void launch(String path_to_candidates_resource, String path_to_key_file, String path_to_model, int top_k, float threshold) throws Exception {
+        ExternalResourceDescription candidatesResourceDesc = createExternalResourceDescription(AnnotatedCollection_Impl.class,
+                path_to_candidates_resource);
 
 		System.out.println("Loaded");
-		
+
 		CollectionReader ae_Reader = createReader(CandidateReader.class,
 				CandidateReader.CANDIDATE_KEY,
-		        candidatesResourceDesc,
-		        CandidateReader.PARAM_DIRECTORY,
-                "src/main/resources/resources/automatic_tagging/train/"
+                candidatesResourceDesc,
+                CandidateReader.PARAM_DIRECTORY,
+                path_to_key_file
         );
-		
+
 		AnalysisEngineDescription ae_Features = createEngineDescription(FeaturesAnnotator.class);
-		
+
 		AnalysisEngineDescription ae_Model = createEngineDescription(WekaClassifier.class,
 				WekaClassifier.PARAM_MODEL,
-                "target/m5p.model",
+                path_to_model,
                 WekaClassifier.PARAM_TOP_K,
-				10,
-				WekaClassifier.PARAM_THRESHOLD,
-				0.3f);
+                top_k,
+                WekaClassifier.PARAM_THRESHOLD,
+                threshold);
 
-      AnalysisEngineDescription aed = createEngineDescription(ae_Features, ae_Model);
-		
+        AnalysisEngineDescription aed = createEngineDescription(ae_Features, ae_Model);
+
 		AnalysisEngine ae = createEngine(aed);
-		
-		runPipeline(ae_Reader, ae);
-  }
-  
+
+        runPipeline(ae_Reader, ae);
+    }
+
 }

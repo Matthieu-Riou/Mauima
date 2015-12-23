@@ -16,29 +16,34 @@ import static org.apache.uima.fit.factory.ExternalResourceFactory.createExternal
 import static org.apache.uima.fit.pipeline.SimplePipeline.runPipeline;
 
 public class ModelCreator {
-	
+
 	public static void main(String[] args) throws Exception {
-		ExternalResourceDescription candidatesResourceDesc = createExternalResourceDescription(AnnotatedCollection_Impl.class,
-				 "file:target/candidates.txt");
+        ModelCreator mc = new ModelCreator();
+        mc.launch("file:target/candidates.txt", "src/main/resources/resources/automatic_tagging/train/");
+    }
+
+    public void launch(String path_to_candidates_resource, String path_to_key_file) throws Exception {
+        ExternalResourceDescription candidatesResourceDesc = createExternalResourceDescription(AnnotatedCollection_Impl.class,
+                path_to_candidates_resource);
 
 		System.out.println("Loaded");
-		
+
 		CollectionReader ae_Reader = createReader(CandidateReader.class,
 				CandidateReader.CANDIDATE_KEY,
-		        candidatesResourceDesc,
-		        CandidateReader.PARAM_DIRECTORY,
-				"src/main/resources/resources/automatic_tagging/train/"
-				);
-		
+                candidatesResourceDesc,
+                CandidateReader.PARAM_DIRECTORY,
+                path_to_key_file
+        );
+
 		AnalysisEngineDescription ae_Features = createEngineDescription(FeaturesAnnotator.class);
-		
-		AnalysisEngineDescription ae_Model = createEngineDescription(WekaModelBuilder.class);
-		
-		AnalysisEngineDescription aed = createEngineDescription(ae_Features, ae_Model);
-		
-		AnalysisEngine ae = createEngine(aed);
-		
-		runPipeline(ae_Reader, ae);
-	  }
+
+        AnalysisEngineDescription ae_Model = createEngineDescription(WekaModelBuilder.class);
+
+        AnalysisEngineDescription aed = createEngineDescription(ae_Features, ae_Model);
+
+        AnalysisEngine ae = createEngine(aed);
+
+        runPipeline(ae_Reader, ae);
+    }
 
 }

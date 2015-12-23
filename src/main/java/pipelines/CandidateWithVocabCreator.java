@@ -13,20 +13,26 @@ import static org.apache.uima.fit.factory.ExternalResourceFactory.createExternal
 import static org.apache.uima.fit.pipeline.SimplePipeline.runPipeline;
 
 public class CandidateWithVocabCreator {
-  public static void main(String[] args) throws Exception {
-    ExternalResourceDescription candidatesResourceDesc = createExternalResourceDescription(
-            CandidateList_Impl.class, new File("candidates.bin"));
 
-    runPipeline(
-            createReaderDescription(TextReader.class, TextReader.PARAM_SOURCE_LOCATION,
-                    "src/main/resources/resources/term_assignment/train/*.txt", TextReader.PARAM_LANGUAGE, "fr"),
-            createEngineDescription(TextualSegmentAnnotator.class),
-            createEngineDescription(Tokenizer.class),
-            createEngineDescription(NGramAnnotator.class, NGramAnnotator.PARAM_MIN_NGRAM_LENGTH, 3,
-                    NGramAnnotator.PARAM_MAX_NGRAM_LENGTH, 3),
-            createEngineDescription(CandidateWithVocabAnnotator.class, CandidateWithVocabAnnotator.CANDIDATE_KEY,
-                    candidatesResourceDesc, CandidateWithVocabAnnotator.PARAM_RDF_FILENAME, "src/main/resources/resources/agrovoc_sample.rdf"),
-            createEngineDescription(CandidateConsumer.class, CandidateConsumer.CANDIDATE_KEY,
-                    candidatesResourceDesc));
-  }
+    public static void main(String[] args) throws Exception {
+        CandidateWithVocabCreator cwvc = new CandidateWithVocabCreator();
+        cwvc.launch("src/main/resources/resources/term_assignment/train/*.txt", "en", 1, 3, "src/main/resources/resources/agrovoc_sample.rdf");
+    }
+
+    public void launch(String path_to_txt, String lang, int min_ngram, int max_ngram, String path_to_vocab) throws Exception {
+        ExternalResourceDescription candidatesResourceDesc = createExternalResourceDescription(
+                CandidateList_Impl.class, new File("candidates.bin"));
+
+        runPipeline(
+                createReaderDescription(TextReader.class, TextReader.PARAM_SOURCE_LOCATION, path_to_txt
+                        , TextReader.PARAM_LANGUAGE, lang),
+                createEngineDescription(TextualSegmentAnnotator.class),
+                createEngineDescription(Tokenizer.class),
+                createEngineDescription(NGramAnnotator.class, NGramAnnotator.PARAM_MIN_NGRAM_LENGTH, min_ngram,
+                        NGramAnnotator.PARAM_MAX_NGRAM_LENGTH, max_ngram),
+                createEngineDescription(CandidateWithVocabAnnotator.class, CandidateWithVocabAnnotator.CANDIDATE_KEY,
+                        candidatesResourceDesc, CandidateWithVocabAnnotator.PARAM_RDF_FILENAME, path_to_vocab),
+                createEngineDescription(CandidateConsumer.class, CandidateConsumer.CANDIDATE_KEY,
+                        candidatesResourceDesc));
+    }
 }
