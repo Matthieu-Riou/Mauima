@@ -22,7 +22,10 @@ public class AllProccess {
         boolean use_vocab = false;
 
         CandidateCreator ccr = new CandidateCreator();
-        ccr.launch(path_to_txt, lang, min_ngram, max_ngram, use_vocab, path_to_vocab);
+        if (use_vocab)
+            ccr.launch(path_to_txt, lang, min_ngram, max_ngram, use_vocab, path_to_vocab);
+        else
+            ccr.launch(path_to_txt, lang, min_ngram, max_ngram);
 
         ModelCreator mc = new ModelCreator();
         mc.launch(path_to_candidates_resource, path_to_key_file);
