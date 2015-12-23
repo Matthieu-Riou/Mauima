@@ -15,7 +15,7 @@ public class AllProccess {
         String path_to_candidates_resource_test = "target/candidates_test.txt";
         String path_to_key_file_test = "src/main/resources/resources/automatic_tagging/test/";
         
-        
+        //For vocabularies, use the resources in src/main/resources/resources/term_assignment
         String path_to_vocab = "src/main/resources/resources/agrovoc_sample.rdf";
         String path_to_model = "target/m5p.model";
 
