@@ -18,7 +18,9 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.List;
 
-
+/**
+ * A custom reader
+ */
 public class CandidateReader extends JCasCollectionReader_ImplBase {
 	
 
@@ -28,24 +30,60 @@ public class CandidateReader extends JCasCollectionReader_ImplBase {
 			mandatory = false, defaultValue = "body")
 	private String cssSelector;
 	*/
-	
+
+	/**
+	 * The name of the key for the resource containing Candidates
+	 */
 	public static final String CANDIDATE_KEY = "candidateKey";
+
+	/**
+	 * The name of the language parameter
+	 */
 	public static final String PARAM_LANGUAGE = "LANGUAGE";
+
+	/**
+	 * The name of the parameter giving the directory into which we have .key files
+	 */
 	public static final String PARAM_DIRECTORY = "key_directory";
-	int i = 0;
-	int size = 0;
-	 @ExternalResource(key = CANDIDATE_KEY)
-	 private AnnotatedCollection collection;
-		@ConfigurationParameter(name = PARAM_LANGUAGE,
-				description = "default language for the text",
-				mandatory = false, defaultValue = "en")
-		private String language;
+
+	/**
+	 * A counter to avoid iterate over the size
+	 */
+	private int i = 0;
+
+	/**
+	 * The number of CAS to generate
+	 */
+	private int size = 0;
+
+	/**
+	 * The attribute linked to the resource of key CANDIDATE_KEY
+	 */
+	@ExternalResource(key = CANDIDATE_KEY)
+	private AnnotatedCollection collection;
+
+	/**
+	 * The attribute linked to the parameter named PARAM_LANGUAGE
+	 */
+	@ConfigurationParameter(name = PARAM_LANGUAGE,
+			description = "default language for the text",
+			mandatory = false, defaultValue = "en")
+	private String language;
+
+	/**
+	 * The attribute linked to the parameter named PARAM_DIRECTORY
+	 */
 	@ConfigurationParameter(
-	name = PARAM_DIRECTORY,
-	description = "The directory containing the key files",
-	mandatory = true)
+			name = PARAM_DIRECTORY,
+			description = "The directory containing the key files",
+			mandatory = true)
 	private String directory_dir;
 
+	/**
+	 * Method to initialize the reader before the pipeline
+	 * @param context The uima context
+	 * @throws ResourceInitializationException
+	 */
 	@Override
 	public void initialize(UimaContext context)
 			throws ResourceInitializationException {
@@ -53,49 +91,70 @@ public class CandidateReader extends JCasCollectionReader_ImplBase {
 		size = collection.getDocuments().size();
 	}
 
+	/**
+	 * Method checking the progression of the generation
+	 * @return An array
+	 */
 	public Progress[] getProgress() {
-		return new Progress[] { new ProgressImpl(i, size, Progress.ENTITIES) };
+		return new Progress[] { new ProgressImpl(i, size, Progress.ENTITIES)};
 	}
 
+	/**
+	 * Check if there is an other CAS to generate
+	 * @return true if there is an other CAS to generate, false otherwise
+	 * @throws IOException
+	 * @throws CollectionException
+	 */
 	public boolean hasNext() throws IOException, CollectionException {
 		return i < size;
 	}
-	
+
+	/**
+	 * Compute the class of a candidate
+	 * @param candidate A candidate
+	 * @param documentName The filename of the document
+	 * @return 1 if the candidate is in the .key associatited to the document, 0 otherwise
+	 */
 	public int computeClass(resources.Candidate candidate, String documentName)
 	{
 		try
 		{
 			BufferedReader readerFile = new BufferedReader(new FileReader(directory_dir+documentName.replaceAll(".txt", ".key")));
 			String line;
-			 while((line = readerFile.readLine()) != null){
-				 String[] splits = line.split("\t");
-				 if (candidate.getFullForms().containsKey(splits[0].toLowerCase()))
-				 {
-					 return 1;
-				 }
-			 }
-			 readerFile.close();
+			while ((line = readerFile.readLine()) != null) {
+				String[] splits = line.split("\t");
+				if (candidate.getFullForms().containsKey(splits[0].toLowerCase())) {
+					return 1;
+				}
+			}
+			readerFile.close();
 		}
 		catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
+
 		return 0;
 	}
 
+	/**
+	 * Method to generate a new CAS
+	 * @param jcas The CAS in which to store the generated CAS
+	 * @throws IOException
+	 * @throws CollectionException
+	 */
 	@Override
 	public void getNext(JCas jcas) throws IOException, CollectionException {
 		jcas.setDocumentLanguage(language);
-		
+
 		List<Candidate> document = collection.getDocuments().get(i);
 		String documentName = collection.getFilename(i);
-		
+
 		Document doc_type = new Document(jcas, 0, 0);
 		doc_type.setDocumentName(documentName);
-		
+
 		doc_type.addToIndexes();
-		
+
 		int cpt = 1;
 		for(resources.Candidate c : document)
 		{
@@ -109,12 +168,12 @@ public class CandidateReader extends JCasCollectionReader_ImplBase {
 			candidate.setLast_occ(c.getLast_occurrence());
 
 			candidate.setClass_(computeClass(c, documentName));
-			
+
 			candidate.addToIndexes();
-			
+
 			cpt++;
 		}
-		
+
 		i++;
 	}
 

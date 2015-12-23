@@ -8,8 +8,17 @@ import types.TextualSegment;
 
 import static org.apache.uima.fit.util.JCasUtil.select;
 
+/**
+ * Analysis engine to tokenize text, but splitting hyphen-words, over apostrophes, and ignoring numbers
+ */
 public class Tokenizer extends JCasAnnotator_ImplBase {
-	@Override
+    /**
+     * Method to process treatments over a CAS
+     *
+     * @param jCas The CAS to use
+     * @throws AnalysisEngineProcessException
+     */
+    @Override
 	public void process(JCas jCas) throws AnalysisEngineProcessException {
 		// TODO Auto-generated method stub
 		for (TextualSegment ts : select(jCas, TextualSegment.class)) {

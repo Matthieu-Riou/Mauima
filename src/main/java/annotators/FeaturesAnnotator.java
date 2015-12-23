@@ -8,27 +8,34 @@ import types.Features;
 
 import static org.apache.uima.fit.util.JCasUtil.select;
 
+/**
+ * Analysis engine to annotate features in a CAS
+ */
 public class FeaturesAnnotator extends JCasAnnotator_ImplBase {
+    /**
+     * Method to process treatments over a CAS
+     *
+     * @param jCas The CAS to use
+     * @throws AnalysisEngineProcessException
+     */
+    @Override
+    public void process(JCas jCas) throws AnalysisEngineProcessException {
 
-  @Override
-  public void process(JCas jCas) throws AnalysisEngineProcessException {
+        for (Candidate c : select(jCas, Candidate.class)) {
+            Features features = new Features(jCas, c.getBegin(), c.getEnd());
 
-	  for (Candidate c : select(jCas, Candidate.class)) 
-	  { 
-		Features features = new Features(jCas, c.getBegin(), c.getEnd());
-		
-		features.setTf(c.getTf()); // 1
-	    features.setDf(c.getDf()); // 2
-	    features.setIdf(c.getIdf()); // 3
-	    features.setTfidf(features.getTf() * features.getIdf());
-	    features.setFirst_occurrence(c.getFirst_occ()); // 4
-	    features.setLast_occurrence(c.getLast_occ()); // 5
-	    features.setSpread(features.getLast_occurrence() - features.getFirst_occurrence()); // 6
-          features.setClass_(c.getClass_());
+            features.setTf(c.getTf()); // 1
+            features.setDf(c.getDf()); // 2
+            features.setIdf(c.getIdf()); // 3
+            features.setTfidf(features.getTf() * features.getIdf());
+            features.setFirst_occurrence(c.getFirst_occ()); // 4
+            features.setLast_occurrence(c.getLast_occ()); // 5
+            features.setSpread(features.getLast_occurrence() - features.getFirst_occurrence()); // 6
+            features.setClass_(c.getClass_());
 
-          features.addToIndexes();
-      }
+            features.addToIndexes();
+        }
 
-  }
-  
+    }
+
 }

@@ -5,12 +5,20 @@ import org.apache.uima.fit.component.JCasAnnotator_ImplBase;
 import org.apache.uima.jcas.JCas;
 import types.TextualSegment;
 
+/**
+ * Analysis engine to segment a text in textual segments (basically phrases)
+ */
 public class TextualSegmentAnnotator extends JCasAnnotator_ImplBase {
-			
-	@Override
-	public void process(JCas jCas) throws AnalysisEngineProcessException {
-		String text = jCas.getDocumentText() + " ";
-		int pred = 0;
+    /**
+     * Method to process treatments over a CAS
+     *
+     * @param jCas The CAS to use
+     * @throws AnalysisEngineProcessException
+     */
+    @Override
+    public void process(JCas jCas) throws AnalysisEngineProcessException {
+        String text = jCas.getDocumentText() + " ";
+        int pred = 0;
         for (int i = 0; i < text.length(); i++) {
             switch (Character.getType(text.charAt(i))) {
                 case Character.LINE_SEPARATOR:
@@ -35,6 +43,6 @@ public class TextualSegmentAnnotator extends JCasAnnotator_ImplBase {
                     }
             }
         }
-	}
+    }
 
 }
