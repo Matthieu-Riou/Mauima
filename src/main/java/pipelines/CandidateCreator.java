@@ -25,10 +25,11 @@ public class CandidateCreator {
     /**
      * Launch the pipeline to generate candidates with or without a vocabulary
      *
-     * @param path_to_txt   The path to the directory containing all .txt files
-     * @param lang          The language of all .txt files
-     * @param min_ngram     The minimum size of the n-gram
-     * @param max_ngram     The maximim size of the n-gram
+     * @param path_to_txt   	The path to the directory containing all .txt files
+     * @param lang 				The language of all .txt files
+     * @param output_filename 	The output file 
+     * @param min_ngram     	The minimum size of the n-gram
+     * @param max_ngram     	The maximim size of the n-gram
      * @throws Exception
      */
     public void launch(String path_to_txt, String lang, String output_filename, int min_ngram, int max_ngram) throws Exception {
@@ -53,12 +54,13 @@ public class CandidateCreator {
     /**
      * Launch the pipeline to generate candidates with or without a vocabulary
      *
-     * @param path_to_txt   The path to the directory containing all .txt files
-     * @param lang          The language of all .txt files
-     * @param min_ngram     The minimum size of the n-gram
-     * @param max_ngram     The maximim size of the n-gram
-     * @param use_vocab     Flag to check if vocabulary is needed or not
-     * @param path_to_vocab The path to the rdf file containing the vocabulary
+     * @param path_to_txt   	The path to the directory containing all .txt files
+     * @param lang          	The language of all .txt files
+     * @param output_filename 	The output file
+     * @param min_ngram     	The minimum size of the n-gram
+     * @param max_ngram     	The maximim size of the n-gram
+     * @param use_vocab     	Flag to check if vocabulary is needed or not
+     * @param path_to_vocab 	The path to the rdf file containing the vocabulary
      * @throws Exception
      */
     public void launch(String path_to_txt, String lang, String output_filename, int min_ngram, int max_ngram, boolean use_vocab, String path_to_vocab) throws Exception {
