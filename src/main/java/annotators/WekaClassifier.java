@@ -182,8 +182,10 @@ public class WekaClassifier extends JCasAnnotator_ImplBase {
 
         Collection<Document> docs = select(jCas, Document.class);
         assert (docs.size() == 1);
+        
+        Document doc = docs.iterator().next();
 
-        System.out.println("\n\nFile : " + docs.iterator().next().getDocumentName());
+        System.out.println("\n\nFile : " + doc.getDocumentName());
         // Input: jcas representing the list of candidates topics for a document, as a collection of
         // features
         // represented by a class Features
@@ -213,32 +215,51 @@ public class WekaClassifier extends JCasAnnotator_ImplBase {
             }
 
         }
-        double retAsGoodReallyGood = 0;
-        double retAsGoodReallyNotGood = 0;
-        double retAsNotGoodReallyGood = 0;
+        
+        if(doc.getHasValidTopics())
+        {
+        	double retAsGoodReallyGood = 0;
+            double retAsGoodReallyNotGood = 0;
+            double retAsNotGoodReallyGood = 0;
 
-        for (Pair<String, Integer> c : candidates_relevantness_probabilities.keySet()) {
-            if (candidates_relevantness_probabilities.get(c)[1] >= threshold_) {
-                if (c.getSecond() == 1)
-                    retAsGoodReallyGood++;
-                else
-                    retAsGoodReallyNotGood++;
-                bests_.put(c, candidates_relevantness_probabilities.get(c)[1]);
-            } else {
-                if (c.getSecond() == 1)
-                    retAsNotGoodReallyGood++;
+            for (Pair<String, Integer> c : candidates_relevantness_probabilities.keySet()) {
+                if (candidates_relevantness_probabilities.get(c)[1] >= threshold_) {
+                    if (c.getSecond() == 1)
+                        retAsGoodReallyGood++;
+                    else
+                        retAsGoodReallyNotGood++;
+                    bests_.put(c, candidates_relevantness_probabilities.get(c)[1]);
+                } else {
+                    if (c.getSecond() == 1)
+                        retAsNotGoodReallyGood++;
+                }
+            }
+
+            bests_ = take_n(sortByValue(bests_));
+            //System.out.println("bests_ = " + bests_.keySet());
+
+            for (Pair<String, Integer> s : bests_.keySet()) {
+                System.out.println(s.getFirst() + " : " + bests_.get(s));
+            }
+            System.out.println("\n##########################################");
+            System.out.println("Precision = " + ((retAsGoodReallyGood + retAsGoodReallyNotGood) == 0 ? 0.0 : retAsGoodReallyGood / (retAsGoodReallyGood + retAsGoodReallyNotGood) * 100) + "%");
+            System.out.println("Recall = " + ((retAsGoodReallyGood + retAsNotGoodReallyGood) == 0 ? 0.0 : retAsGoodReallyGood / (retAsGoodReallyGood + retAsNotGoodReallyGood) * 100) + "%");
+            System.out.println("############################################");
+        }
+        else
+        {
+        	for (Pair<String, Integer> c : candidates_relevantness_probabilities.keySet()) {
+                if (candidates_relevantness_probabilities.get(c)[1] >= threshold_) {
+                    bests_.put(c, candidates_relevantness_probabilities.get(c)[1]);
+                }
+            }
+
+            bests_ = take_n(sortByValue(bests_));
+            //System.out.println("bests_ = " + bests_.keySet());
+
+            for (Pair<String, Integer> s : bests_.keySet()) {
+                System.out.println(s.getFirst() + " : " + bests_.get(s));
             }
         }
-
-        bests_ = take_n(sortByValue(bests_));
-        //System.out.println("bests_ = " + bests_.keySet());
-
-        for (Pair<String, Integer> s : bests_.keySet()) {
-            System.out.println(s.getFirst() + " : " + bests_.get(s));
-        }
-        System.out.println("\n##########################################");
-        System.out.println("Precision = " + ((retAsGoodReallyGood + retAsGoodReallyNotGood) == 0 ? 0.0 : retAsGoodReallyGood / (retAsGoodReallyGood + retAsGoodReallyNotGood) * 100) + "%");
-        System.out.println("Recall = " + ((retAsGoodReallyGood + retAsNotGoodReallyGood) == 0 ? 0.0 : retAsGoodReallyGood / (retAsGoodReallyGood + retAsNotGoodReallyGood) * 100) + "%");
-        System.out.println("############################################");
     }
 }

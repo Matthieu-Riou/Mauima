@@ -10,8 +10,8 @@ import org.apache.uima.jcas.tcas.Annotation;
 
 
 /** 
- * Updated by JCasGen Fri Dec 18 15:02:47 CET 2015
- * XML source: /comptes/E103642E/Documents/2015-2016/DeveloppementLogiciel/atal2.dlp/workspace/Mauima/src/main/resources/types/typeSystemDescriptor.xml
+ * Updated by JCasGen Thu Dec 24 00:46:12 CET 2015
+ * XML source: /home/matthieu/Documents/Cours/M2/Dev/Mauima/src/main/resources/types/typeSystemDescriptor.xml
  * @generated */
 public class Features extends Annotation {
   /** @generated

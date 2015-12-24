@@ -115,15 +115,17 @@ public class CandidateReader extends JCasCollectionReader_ImplBase {
 	 * @param documentName The filename of the document
 	 * @return 1 if the candidate is in the .key associatited to the document, 0 otherwise
 	 */
-	public int computeClass(resources.Candidate candidate, String documentName)
+	public int computeClass(resources.Candidate candidate, Document document)
 	{
 		try
 		{
-			BufferedReader readerFile = new BufferedReader(new FileReader(directory_dir+documentName.replaceAll(".txt", ".key")));
+			document.setHasValidTopics(true);
+			BufferedReader readerFile = new BufferedReader(new FileReader(directory_dir+document.getDocumentName().replaceAll(".txt", ".key")));
 			String line;
 			while ((line = readerFile.readLine()) != null) {
 				String[] splits = line.split("\t");
 				if (candidate.getFullForms().containsKey(splits[0].toLowerCase())) {
+					readerFile.close();
 					return 1;
 				}
 			}
@@ -131,6 +133,7 @@ public class CandidateReader extends JCasCollectionReader_ImplBase {
 		}
 		catch (Exception e) {
 			// TODO Auto-generated catch block
+			document.setHasValidTopics(false);
 			e.printStackTrace();
 		}
 
@@ -167,7 +170,7 @@ public class CandidateReader extends JCasCollectionReader_ImplBase {
 			candidate.setFirst_occ(c.getFirst_occurrence());
 			candidate.setLast_occ(c.getLast_occurrence());
 
-			candidate.setClass_(computeClass(c, documentName));
+			candidate.setClass_(computeClass(c, doc_type));
 
 			candidate.addToIndexes();
 

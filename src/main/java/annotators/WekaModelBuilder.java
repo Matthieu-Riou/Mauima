@@ -1,15 +1,18 @@
 package annotators;
 
+import java.util.Collection;
+
 import org.apache.uima.UimaContext;
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
 import org.apache.uima.fit.component.JCasAnnotator_ImplBase;
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.resource.ResourceInitializationException;
+
+import types.Document;
 import types.Features;
 import weka.classifiers.Classifier;
 import weka.classifiers.meta.Bagging;
 import weka.core.*;
-
 import static org.apache.uima.fit.util.JCasUtil.select;
 
 /**
@@ -77,6 +80,16 @@ public class WekaModelBuilder extends JCasAnnotator_ImplBase {
 	@Override
 	public void process(JCas jCas) throws AnalysisEngineProcessException {
 
+		Collection<Document> docs = select(jCas, Document.class);
+        assert (docs.size() == 1);
+        
+        Document doc = docs.iterator().next();
+        
+        if(!doc.getHasValidTopics())
+        {
+        	throw new AnalysisEngineProcessException("You need a .key file to learn the model", null);
+        }
+        
 		for(Features f : select(jCas, Features.class))
 		{
 			double[] vals = {f.getTf(), f.getDf(), f.getIdf(), f.getTfidf(), f.getFirst_occurrence(), f.getLast_occurrence(), f.getSpread(), f.getClass_()};

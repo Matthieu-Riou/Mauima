@@ -11,8 +11,8 @@ import org.apache.uima.jcas.tcas.Annotation;
 
 
 /** 
- * Updated by JCasGen Fri Dec 18 15:02:47 CET 2015
- * XML source: /comptes/E103642E/Documents/2015-2016/DeveloppementLogiciel/atal2.dlp/workspace/Mauima/src/main/resources/types/typeSystemDescriptor.xml
+ * Updated by JCasGen Thu Dec 24 00:46:12 CET 2015
+ * XML source: /home/matthieu/Documents/Cours/M2/Dev/Mauima/src/main/resources/types/typeSystemDescriptor.xml
  * @generated */
 public class Document extends Annotation {
   /** @generated
@@ -96,6 +96,28 @@ public class Document extends Annotation {
     if (Document_Type.featOkTst && ((Document_Type)jcasType).casFeat_documentName == null)
       jcasType.jcas.throwFeatMissing("documentName", "types.Document");
     jcasType.ll_cas.ll_setStringValue(addr, ((Document_Type)jcasType).casFeatCode_documentName, v);}    
+   
+    
+  //*--------------*
+  //* Feature: hasValidTopics
+
+  /** getter for hasValidTopics - gets 
+   * @generated
+   * @return value of the feature 
+   */
+  public boolean getHasValidTopics() {
+    if (Document_Type.featOkTst && ((Document_Type)jcasType).casFeat_hasValidTopics == null)
+      jcasType.jcas.throwFeatMissing("hasValidTopics", "types.Document");
+    return jcasType.ll_cas.ll_getBooleanValue(addr, ((Document_Type)jcasType).casFeatCode_hasValidTopics);}
+    
+  /** setter for hasValidTopics - sets  
+   * @generated
+   * @param v value to set into the feature 
+   */
+  public void setHasValidTopics(boolean v) {
+    if (Document_Type.featOkTst && ((Document_Type)jcasType).casFeat_hasValidTopics == null)
+      jcasType.jcas.throwFeatMissing("hasValidTopics", "types.Document");
+    jcasType.ll_cas.ll_setBooleanValue(addr, ((Document_Type)jcasType).casFeatCode_hasValidTopics, v);}    
   }
 
     

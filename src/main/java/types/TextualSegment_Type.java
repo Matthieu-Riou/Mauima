@@ -12,7 +12,7 @@ import org.apache.uima.jcas.JCasRegistry;
 import org.apache.uima.jcas.tcas.Annotation_Type;
 
 /** textual segment delemited by syntaxical boundary
- * Updated by JCasGen Fri Dec 18 15:02:47 CET 2015
+ * Updated by JCasGen Thu Dec 24 00:46:13 CET 2015
  * @generated */
 public class TextualSegment_Type extends Annotation_Type {
   /** @generated 

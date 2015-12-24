@@ -14,7 +14,7 @@ import org.apache.uima.cas.Feature;
 import org.apache.uima.jcas.tcas.Annotation_Type;
 
 /** 
- * Updated by JCasGen Fri Dec 18 15:02:47 CET 2015
+ * Updated by JCasGen Thu Dec 24 00:46:12 CET 2015
  * @generated */
 public class Document_Type extends Annotation_Type {
   /** @generated 
@@ -69,6 +69,30 @@ public class Document_Type extends Annotation_Type {
     ll_cas.ll_setStringValue(addr, casFeatCode_documentName, v);}
     
   
+ 
+  /** @generated */
+  final Feature casFeat_hasValidTopics;
+  /** @generated */
+  final int     casFeatCode_hasValidTopics;
+  /** @generated
+   * @param addr low level Feature Structure reference
+   * @return the feature value 
+   */ 
+  public boolean getHasValidTopics(int addr) {
+        if (featOkTst && casFeat_hasValidTopics == null)
+      jcas.throwFeatMissing("hasValidTopics", "types.Document");
+    return ll_cas.ll_getBooleanValue(addr, casFeatCode_hasValidTopics);
+  }
+  /** @generated
+   * @param addr low level Feature Structure reference
+   * @param v value to set 
+   */    
+  public void setHasValidTopics(int addr, boolean v) {
+        if (featOkTst && casFeat_hasValidTopics == null)
+      jcas.throwFeatMissing("hasValidTopics", "types.Document");
+    ll_cas.ll_setBooleanValue(addr, casFeatCode_hasValidTopics, v);}
+    
+  
 
 
 
@@ -84,6 +108,10 @@ public class Document_Type extends Annotation_Type {
  
     casFeat_documentName = jcas.getRequiredFeatureDE(casType, "documentName", "uima.cas.String", featOkTst);
     casFeatCode_documentName  = (null == casFeat_documentName) ? JCas.INVALID_FEATURE_CODE : ((FeatureImpl)casFeat_documentName).getCode();
+
+ 
+    casFeat_hasValidTopics = jcas.getRequiredFeatureDE(casType, "hasValidTopics", "uima.cas.Boolean", featOkTst);
+    casFeatCode_hasValidTopics  = (null == casFeat_hasValidTopics) ? JCas.INVALID_FEATURE_CODE : ((FeatureImpl)casFeat_hasValidTopics).getCode();
 
   }
 }
